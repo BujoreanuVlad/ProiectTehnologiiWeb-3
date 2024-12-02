@@ -107,6 +107,10 @@ export class GrupEvenimente {
 			}
 		}
 	}
+
+	toString() {
+		return JSON.stringify({"nume": this.#nume, "listaEvenimente": this.#listaEvenimente.toString()})
+	}
 }
 
 //module.exports = GrupEvenimente;

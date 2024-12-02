@@ -1,5 +1,6 @@
 //import { checkIfEqual, checkIsInList } from "./utils.js";
 const { checkIfEqual, checkIsInList } = await import("./utils.js");
+const { Participant } = await import("./participant.js");
 
 export class Eveniment {
 
@@ -136,6 +137,8 @@ export class Eveniment {
 
 	adaugaParticipant(participant, dataInregistrare=null) {
 
+		this.#checkValidParticipant(participant);
+
 		if (checkIsInList(this.#listaParticipanti, participant) === -1) {
 
 			if (dataInregistrare === null) {
@@ -222,7 +225,7 @@ export class Eveniment {
 	}
 
 	toString() {
-		return JSON.stringify({"nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere, "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti, "nrLocuriDisponibile": this.#nrLocuriDisponibile});
+		return JSON.stringify({"nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere, "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti.map((obj) => {obj['participant'] = obj['participant'].toString(); return obj}), "nrLocuriDisponibile": this.#nrLocuriDisponibile});
 	}
 
 	static equals(ev1, ev2) {
@@ -258,6 +261,13 @@ export class Eveniment {
 		}
 
 		return true;
+	}
+
+	#checkValidParticipant(p) {
+		
+		if (!(p instanceof Participant)) {
+			throw new Error("Eroare. Participant invalid.");
+		}
 	}
 
 	equals(otherEvent) {

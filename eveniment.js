@@ -1,4 +1,7 @@
-class Eveniment {
+//import { checkIfEqual, checkIsInList } from "./utils.js";
+const { checkIfEqual, checkIsInList } = await import("./utils.js");
+
+export class Eveniment {
 
 	#nume;
 	#dataDeschidere;
@@ -102,12 +105,12 @@ class Eveniment {
 		return this.#listaParticipanti.length;
 	}
 
-	removeParticipant(participant) {
+	stergeParticipant(participant) {
 
-		let indexParticipant = this.#checkIsInList(this.#listaParticipanti, participant);
+		let indexParticipant = checkIsInList(this.#listaParticipanti, participant);
 
 		if (indexParticipant >= 0) {
-			this.#listaParticipanti.splice(indexParticipant);
+			this.#listaParticipanti.splice(indexParticipant, 1);
 			return true;
 		}
 
@@ -131,71 +134,9 @@ class Eveniment {
 		this.#nrLocuriDisponibile = nrLocuriDisponibile;
 	}
 
-	#checkIfEqual(obj1, obj2) {
-		
-		if (typeof(obj1) === 'object' || typeof(obj2) === 'object') {
-			if (obj1 == obj2) {
-				return true;
-			}
-		}
-		else {
-			return obj1 === obj2;
-		}
-
-		if (typeof(obj1) != 'object' || typeof(obj2) != 'object') {
-			return false;
-		}
-
-		let keys1 = Object.keys(obj1)
-		let keys2 = Object.keys(obj2)
-
-		if (keys1.length !== keys2.length) {
-			return false;
-		}
-
-		keys1.sort()
-		keys2.sort()
-
-		for (let i = 0; i < keys1.length; i++) {
-			
-			if (keys1[i] !== keys2[i]) {
-				return false;
-			}
-
-			if (obj1[keys1[i]] !== obj2[keys2[i]]) {
-				return false;
-			}
-		}
-
-		return true;
-	}
-
-	//Function to check whether or not an object is present in an array or in the properties of the objects of an array
-	#checkIsInList(list, obj) {
-		
-		for (let i = 0; i < list.length; i++) {
-
-			let elem = list[i];
-
-			//Check if object is part of the array
-			if (this.#checkIfEqual(elem, obj)) {
-				return i;
-			}
-
-			//If the array is made up of objects, check if your object is present in the properties of the current element
-			for (let propr in elem) {
-				if (this.#checkIfEqual(elem[propr], obj)) {
-					return i;
-				}
-			}
-		}
-
-		return -1;
-	}
-
 	adaugaParticipant(participant, dataInregistrare=null) {
 
-		if (this.#checkIsInList(this.#listaParticipanti, participant) === -1) {
+		if (checkIsInList(this.#listaParticipanti, participant) === -1) {
 
 			if (dataInregistrare === null) {
 				dataInregistrare = new Date();
@@ -251,6 +192,9 @@ class Eveniment {
 		if (!(typeof(nrLocuri) === 'number' || nrLocuri instanceof Number)) {
 			throw new Error("Eroare. Numarul de locuri trebuie sa fie un numar.")
 		}
+		if (!Number.isInteger(nrLocuri)) {
+			throw new Error("Eroare. Numarul de locuri sa fie un numar intreg.")
+		}
 		if (nrLocuri <= 0) {
 			throw new Error("Eroare. Numarul de locuri nu poate fi mai mic decat 1.")
 		}
@@ -280,6 +224,45 @@ class Eveniment {
 	toString() {
 		return JSON.stringify({"nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere, "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti, "nrLocuriDisponibile": this.#nrLocuriDisponibile});
 	}
+
+	static equals(ev1, ev2) {
+		
+		if (ev1.#nume !== ev2.#nume) {
+			return false;
+		}
+
+		if (!checkIfEqual(ev1.#dataDeschidere, ev2.#dataDeschidere)) {
+			return false;
+		}
+
+		if (ev1.#interval !== ev2.#interval) {
+			return false;
+		}
+
+		if (ev1.#nrLocuriDisponibile !== ev2.#nrLocuriDisponibile) {
+			return false;
+		}
+
+		if (ev1.#codAcces !== ev2.#codAcces) {
+			return false;
+		}
+
+		if (ev1.getNrParticipanti() !== ev2.getNrParticipanti()) {
+			return false;
+		}
+
+		for (let i = 0; i < ev1.#listaParticipanti.length; i++) {
+			if (!checkIfEqual(ev1.#listaParticipanti[i], ev2.#listaParticipanti[i])) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	equals(otherEvent) {
+		return Eveniment.equals(this, otherEvent);
+	}
 }
 
-module.exports = Eveniment;
+//module.exports = Eveniment;

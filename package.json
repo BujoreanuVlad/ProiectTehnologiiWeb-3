@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-	  "build": "webpack --mode production",
-	  "start": "npm run build; node main.js"
+    "build": "webpack --mode production",
+    "start": "npm run build; node main.js",
+    "dev": "concurrently --kill-others-on-fail \"webpack --mode production --watch\" \"npx nodemon main.js\""
   },
   "author": "",
   "license": "ISC",
@@ -14,10 +15,13 @@
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "babel-loader": "^9.2.1",
+    "concurrently": "^9.1.0",
     "cors": "^2.8.5",
     "css-loader": "^7.1.2",
     "express": "^4.21.1",
     "html-webpack-plugin": "^5.6.3",
+    "nodemon": "^3.1.7",
+    "nodemon-webpack-plugin": "^4.8.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "style-loader": "^4.0.0",

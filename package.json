@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-	  "build": "webpack --mode production",
-	  "start": "npm run build; node main.js"
+    "build": "webpack --mode production",
+    "start": "npm run build; node main.js"
   },
   "author": "",
   "license": "ISC",
@@ -15,13 +15,16 @@
     "@babel/preset-react": "^7.25.9",
     "babel-loader": "^9.2.1",
     "cors": "^2.8.5",
-    "css-loader": "^7.1.2",
     "express": "^4.21.1",
     "html-webpack-plugin": "^5.6.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "style-loader": "^4.0.0",
+    "react-icons": "^5.4.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0"
   }
 }

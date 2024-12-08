@@ -1,5 +1,5 @@
 //import { checkIfEqual, checkIsInList } from "./utils.js";
-const { checkIfEqual, checkIsInList } = await import("./utils.js");
+const { checkIfEqual, checkIsInList , genCodAcces} = await import("./utils.js");
 const { Participant } = await import("./participant.js");
 
 export class Eveniment {
@@ -27,7 +27,7 @@ export class Eveniment {
 		this.#nrLocuriDisponibile = nrLocuriDisponibile;
 		
 		if (codAcces === null) {
-			this.#codAcces = this.#genCodAcces();
+			this.#codAcces = genCodAcces();
 		}
 		else {
 			this.#checkValidCodAcces(codAcces);
@@ -39,20 +39,6 @@ export class Eveniment {
 
 		this.#checkValidListaParticipanti(listaParticipanti);
 		this.#listaParticipanti = listaParticipanti;
-	}
-
-	#genCodAcces(length=6) {
-
-		let codAcces = '';
-
-		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		const charactersLength = characters.length;
-
-		for (let i = 0; i < length; i++) {
-		  codAcces += characters.charAt(Math.floor(Math.random() * charactersLength));
-		}
-
-		return codAcces;
 	}
 
 	getNume() {
@@ -98,7 +84,7 @@ export class Eveniment {
 			this.#codAcces = cod;
 		}
 		else if (typeof(cod) === 'number' || cod instanceof Number) {
-			this.#codAcces = this.#genCodAcces(cod);
+			this.#codAcces = genCodAcces(cod);
 		}
 	}
 

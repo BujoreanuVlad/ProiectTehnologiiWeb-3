@@ -1,8 +1,10 @@
-const { Eveniment } = await import("./eveniment.js");
+//const { Eveniment } = await import("./eveniment.js");
+const Eveniment = require("./eveniment.js");
 //import { checkIfEqual, checkIsInList } from "./utils.js";
-const { checkIfEqual, checkIsInList } = await import("./utils.js");
+//const { checkIfEqual, checkIsInList } = await import("./utils.js");
+const { checkIfEqual, checkIsInList } = require("./utils.js");
 
-export class GrupEvenimente {
+class GrupEvenimente {
 
 	#nume;
 	#listaEvenimente;
@@ -111,6 +113,18 @@ export class GrupEvenimente {
 	toString() {
 		return JSON.stringify({"nume": this.#nume, "listaEvenimente": this.#listaEvenimente.toString()})
 	}
+
+	static fromJSON(obj) {
+
+		let listaEvenimente = []
+
+		if (Object.keys(obj).indexOf("listaEvenimente") >= 0) {
+			listaEvenimente = obj.listaEvenimente
+		}
+
+		return new GrupEvenimente(obj.nume, listaEvenimente)
+	}
+
 }
 
-//module.exports = GrupEvenimente;
+module.exports = GrupEvenimente;

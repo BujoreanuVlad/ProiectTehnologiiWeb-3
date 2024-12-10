@@ -1,4 +1,4 @@
-export class Participant {
+class Participant {
 
 	#nume;
 	#prenume;
@@ -182,4 +182,11 @@ export class Participant {
 
 		return JSON.stringify({"nume": this.#nume, "prenume": this.#prenume, "nrTelefon": this.#nrTelefon, "email": this.#email, "dataNastere": this.#dataNastere, "username": this.#username, "password": this.#password})
 	}
+
+	static fromJSON(obj) {
+
+		return new Participant(obj.nume, obj.prenume, obj.nrTelefon, obj.email, obj.dataNastere, obj.username, obj.password)
+	}
 }
+
+module.exports = Participant;

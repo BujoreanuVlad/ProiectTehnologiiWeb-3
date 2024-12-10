@@ -1,8 +1,10 @@
 //import { checkIfEqual, checkIsInList } from "./utils.js";
-const { checkIfEqual, checkIsInList , genCodAcces} = await import("./utils.js");
-const { Participant } = await import("./participant.js");
+//const { checkIfEqual, checkIsInList , genCodAcces} = await import("./utils.js");
+//const { Participant } = await import("./participant.js");
+const { checkIfEqual, checkIsInList , genCodAcces} = require("./utils.js");
+const Participant = require("./participant.js")
 
-export class Eveniment {
+class Eveniment {
 
 	#nume;
 	#dataDeschidere;
@@ -26,7 +28,7 @@ export class Eveniment {
 		this.#checkValidNrLocuri(nrLocuriDisponibile);
 		this.#nrLocuriDisponibile = nrLocuriDisponibile;
 		
-		if (codAcces === null) {
+		if (codAcces == null) {
 			this.#codAcces = genCodAcces();
 		}
 		else {
@@ -259,6 +261,25 @@ export class Eveniment {
 	equals(otherEvent) {
 		return Eveniment.equals(this, otherEvent);
 	}
+
+	static fromJSON(obj) {
+		
+		let codAcces = null
+		let stare = "CLOSED"
+		let listaParticipanti = []
+
+		if (Object.keys(obj).indexOf("codAcces") >= 0) {
+			codAcces = obj.codAcces;
+		}
+		if (Object.keys(obj).indexOf("stare") >= 0) {
+			stare = obj.stare;
+		}
+		if (Object.keys(obj).indexOf("listaParticipanti") >= 0) {
+			listaParticipanti = obj.listaParticipanti;
+		}
+
+		return new Eveniment(obj.nume, obj.dataDeschidere, obj.interval, obj.nrLocuriDisponibile, codAcces, stare, listaParticipanti);
+	}
 }
 
-//module.exports = Eveniment;
+module.exports = Eveniment;

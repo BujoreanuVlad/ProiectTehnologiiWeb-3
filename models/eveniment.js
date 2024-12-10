@@ -6,7 +6,7 @@ const {DataTypes, UUIDV4} = require('sequelize')
 // const { genCodAcces } = await import("../utils.js")
 const {genCodAcces }= require("../utils.js")
 
-const Eveniment = sequelize.define('eveniment', {
+const Eveniment = sequelize.define('event', {
     id: {
         type: DataTypes.UUID,
         defaultValue:UUIDV4,

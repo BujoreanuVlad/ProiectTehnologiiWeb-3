@@ -43,8 +43,8 @@ const Participant = sequelize.define('participant', {
         type: DataTypes.DATE,
         allowNull: false,
         validate: {
-            validator(value) {
-                if(new Date(value) < new Date()) {
+            validateBornAfterToday(value) {
+                if(new Date(value) >= new Date()) {
                     throw new Error("Invalid date!");
                 }
             }

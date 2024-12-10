@@ -5,7 +5,7 @@ const sequelize = require('../sequelize.js')
 const {DataTypes, UUIDV4} = require('sequelize')
 
 
-const GrupEvenimente = sequelize.define('grupEvenimente', {
+const GrupEvenimente = sequelize.define('event_group', {
     id: {
         type: DataTypes.UUID,
         defaultValue:UUIDV4,

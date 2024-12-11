@@ -4,6 +4,7 @@ import { FaLock } from "react-icons/fa";
 import './app.css'
 import './modal.css'
 import Snowfall from './Snow.jsx';
+import './snow.css'
 export default function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 

@@ -9,7 +9,7 @@
   },
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "- log in ## Administrator: - overview pentru grupurile de evenimente - pop up pentru un formular de adaugare - detalii eveniment - export per eveniment ## Participant: - interfata prezentarea evenimentelor - timeline - pagina descriere --> inscriere - meniu utilizator (optional)",
   "dependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",

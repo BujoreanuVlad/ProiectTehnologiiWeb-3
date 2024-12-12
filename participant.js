@@ -180,7 +180,7 @@ class Participant {
 
 	toString() {
 
-		return JSON.stringify({"nume": this.#nume, "prenume": this.#prenume, "nrTelefon": this.#nrTelefon, "email": this.#email, "dataNastere": this.#dataNastere, "username": this.#username, "password": this.#password})
+		return JSON.stringify({"nume": this.#nume, "prenume": this.#prenume, "nrTelefon": this.#nrTelefon, "email": this.#email, "dataNastere": this.#dataNastere.toString(), "username": this.#username, "password": this.#password})
 	}
 
 	static fromJSON(obj) {

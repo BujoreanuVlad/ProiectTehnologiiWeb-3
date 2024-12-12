@@ -6,11 +6,6 @@ const sequelize = require('../sequelize.js')
 const {DataTypes, UUIDV4} = require('sequelize')
 
 const Participant = sequelize.define('participant', {
-    id: {
-        type: DataTypes.UUID,
-        defaultValue:UUIDV4,
-        primaryKey: true
-    },
     nume: {
         type:DataTypes.STRING,
         allowNull: false, 
@@ -55,7 +50,8 @@ const Participant = sequelize.define('participant', {
         allowNull: false,
         validate: {
             is:  /^\w+$/
-        }
+        },
+        primaryKey: true
      },
      password: {
         type: DataTypes.STRING,

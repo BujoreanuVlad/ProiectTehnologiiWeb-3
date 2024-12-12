@@ -6,6 +6,7 @@ const Participant = require("./participant.js")
 
 class Eveniment {
 
+	#id;
 	#nume;
 	#dataDeschidere;
 	#interval;
@@ -14,7 +15,7 @@ class Eveniment {
 	#stare;
 	#listaParticipanti;
 
-	constructor(nume, dataDeschidere, interval, nrLocuriDisponibile, codAcces=null, stare="CLOSED", listaParticipanti=[]) {
+	constructor(nume, dataDeschidere, interval, nrLocuriDisponibile, codAcces=null, stare="CLOSED", listaParticipanti=[], id=null) {
 		
 		this.#checkValidNume(nume);
 		this.#nume = nume;
@@ -41,6 +42,12 @@ class Eveniment {
 
 		this.#checkValidListaParticipanti(listaParticipanti);
 		this.#listaParticipanti = listaParticipanti;
+
+		this.#id = id;
+	}
+
+	getId() {
+		return this.#id;
 	}
 
 	getNume() {
@@ -213,7 +220,7 @@ class Eveniment {
 	}
 
 	toString() {
-		return JSON.stringify({"nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere, "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti.map((obj) => {obj['participant'] = obj['participant'].toString(); return obj}), "nrLocuriDisponibile": this.#nrLocuriDisponibile});
+		return JSON.stringify({"id": this.#id, "nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere.toString(), "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti.map((obj) => {obj['participant'] = obj['participant'].toString(); return obj}), "nrLocuriDisponibile": this.#nrLocuriDisponibile});
 	}
 
 	static equals(ev1, ev2) {
@@ -267,6 +274,7 @@ class Eveniment {
 		let codAcces = null
 		let stare = "CLOSED"
 		let listaParticipanti = []
+		let id = null
 
 		if (Object.keys(obj).indexOf("codAcces") >= 0) {
 			codAcces = obj.codAcces;
@@ -277,8 +285,11 @@ class Eveniment {
 		if (Object.keys(obj).indexOf("listaParticipanti") >= 0) {
 			listaParticipanti = obj.listaParticipanti;
 		}
+		if (Object.keys(obj).indexOf("id") >= 0) {
+			id = obj.id;
+		}
 
-		return new Eveniment(obj.nume, obj.dataDeschidere, obj.interval, obj.nrLocuriDisponibile, codAcces, stare, listaParticipanti);
+		return new Eveniment(obj.nume, obj.dataDeschidere, obj.interval, obj.nrLocuriDisponibile, codAcces, stare, listaParticipanti, id);
 	}
 }
 

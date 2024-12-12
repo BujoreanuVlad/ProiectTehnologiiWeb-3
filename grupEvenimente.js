@@ -6,16 +6,23 @@ const { checkIfEqual, checkIsInList } = require("./utils.js");
 
 class GrupEvenimente {
 
+	#id;
 	#nume;
 	#listaEvenimente;
 
-	constructor(nume, listaEvenimente=[]) {
+	constructor(nume, listaEvenimente=[], id=null) {
 		
 		this.#checkValidNume(nume);
 		this.#nume = nume;
 
 		this.#checkValidListaEvenimente(listaEvenimente);
 		this.#listaEvenimente = listaEvenimente;
+
+		this.#id = id;
+	}
+
+	getId() {
+		return this.#id;
 	}
 
 	getNume() {
@@ -111,18 +118,22 @@ class GrupEvenimente {
 	}
 
 	toString() {
-		return JSON.stringify({"nume": this.#nume, "listaEvenimente": this.#listaEvenimente.toString()})
+		return JSON.stringify({"id": this.#id, "nume": this.#nume, "listaEvenimente": this.#listaEvenimente.toString()})
 	}
 
 	static fromJSON(obj) {
 
 		let listaEvenimente = []
+		let id = null
 
 		if (Object.keys(obj).indexOf("listaEvenimente") >= 0) {
 			listaEvenimente = obj.listaEvenimente
 		}
+		if (Object.keys(obj).indexOf("id") >= 0) {
+			id = obj.id
+		}
 
-		return new GrupEvenimente(obj.nume, listaEvenimente)
+		return new GrupEvenimente(obj.nume, listaEvenimente, id)
 	}
 
 }

@@ -45,7 +45,11 @@ const Eveniment = sequelize.define('event', {
         type: DataTypes.ENUM('CLOSED', 'OPEN'),
         allowNull: false,
         defaultValue: 'CLOSED'
-     }
+     },
+	 idGrup: {
+        type: DataTypes.UUID,
+		allowNull: false
+	 }
 })
 
 // export default Eveniment;

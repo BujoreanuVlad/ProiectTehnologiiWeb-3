@@ -4,27 +4,36 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "npm run build; node main.js"
+    "start": "npm run build; node main.js",
+    "dev": "concurrently --kill-others-on-fail \"webpack --mode production --watch\" \"npx nodemon main.js\""
   },
   "author": "",
   "license": "ISC",
-  "description": "",
+  "description": "- log in ## Administrator: - overview pentru grupurile de evenimente - pop up pentru un formular de adaugare - detalii eveniment - export per eveniment ## Participant: - interfata prezentarea evenimentelor - timeline - pagina descriere --> inscriere - meniu utilizator (optional)",
   "dependencies": {
     "@babel/core": "^7.26.0",
     "@babel/preset-env": "^7.26.0",
     "@babel/preset-react": "^7.25.9",
     "babel-loader": "^9.2.1",
+    "concurrently": "^9.1.0",
     "cors": "^2.8.5",
     "crypto-js": "^4.2.0",
     "css-loader": "^7.1.2",
-    "express": "^4.21.1",
-    "html-webpack-plugin": "^5.6.3",
     "mysql2": "^3.11.5",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "sequelize": "^6.37.5",
     "style-loader": "^4.0.0",
+    "express": "^4.21.1",
+    "html-webpack-plugin": "^5.6.3",
+    "nodemon": "^3.1.7",
+    "nodemon-webpack-plugin": "^4.8.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-icons": "^5.4.0",
     "webpack": "^5.96.1",
     "webpack-cli": "^5.1.4"
+  },
+  "devDependencies": {
+    "css-loader": "^7.1.2",
+    "style-loader": "^4.0.0"
   }
 }

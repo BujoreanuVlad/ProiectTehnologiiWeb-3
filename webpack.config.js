@@ -1,7 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
-    entry: './app.js', // Entry point of your application
+    entry: "./pages/main.jsx", // Entry point of your application
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js', // Output bundle file name
@@ -16,7 +16,7 @@ module.exports = {
                 },
             },
 			{
-				test: /\.css$/,
+				test: /\.css$/i,
 				use: ["style-loader", "css-loader"]
 			}
         ],

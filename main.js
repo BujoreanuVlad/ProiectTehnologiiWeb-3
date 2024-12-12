@@ -50,8 +50,6 @@ router.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "dist/index.html"));
 })
 
-app.listen(3000, () => {console.log("Listening on port:", 3000)})
-
 app.get("/resetDB", async (req, res) => {
     try {
         await sequelize.sync({ force: true });
@@ -62,4 +60,5 @@ app.get("/resetDB", async (req, res) => {
     }
 });
 
+app.listen(3000, () => {console.log("Server started on: " + "http://localhost:3000")})
 

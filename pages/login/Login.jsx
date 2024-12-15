@@ -5,7 +5,7 @@ import './app.css'
 import './modal.css'
 import Snowfall from './Snow.jsx';
 import './snow.css'
-export default function App() {
+export default function Login() {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);

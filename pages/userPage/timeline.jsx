@@ -1,37 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './timeline.css';
 
+import eventsData from './events.json'; 
+import eventImage from '../../resource/89982-original.jpg';
 const Timeline = () => {
-  const [events, setEvents] = useState([]);
-
-  useEffect(() => {
-    const fetchEvents = async () => {
-      try {
-        const response = await fetch('./events.json', {
-          method: 'GET',  // Tipul cererii
-          headers: {
-            'Content-Type': 'application/json',  
-            'Accept': 'application/json'        
-          }
-        });
-        
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        setEvents(data);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-      }
-    };
-
-    fetchEvents();  
-  }, []);
-
   const groupEventsByDate = () => {
     const grouped = {};
-    events.forEach(event => {
+    eventsData.forEach(event => {
       if (!grouped[event.date]) {
         grouped[event.date] = [];
       }
@@ -43,21 +18,22 @@ const Timeline = () => {
   const groupedEvents = groupEventsByDate();
 
   return (
+    <div className="timeline-container">
     <div className="timeline">
       {Object.keys(groupedEvents).map(date => (
         <div key={date} className="date-group">
           <h3>{date}</h3>
-          <ul>
-            {groupedEvents[date].map(event => (
-              <li key={event.id} className="event">
-                <h4>{event.title}</h4>
-                <p>{event.description}</p>
-                <small>{event.location}</small>
-              </li>
-            ))}
-          </ul>
+          <div className="events-row">
+          {groupedEvents[date].map(event => (
+            <div key={event.id} className="event">
+            <img src={eventImage} alt={event.title} className="event-image" />
+            <h4>{event.title}</h4>
+          </div>          
+          ))}
+        </div>
         </div>
       ))}
+    </div>
     </div>
   );
 };

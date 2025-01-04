@@ -21,17 +21,11 @@ module.exports = {
                 use: ["style-loader", "css-loader"], // Handling CSS files
             },
             {
-                test: /\.(jpg|jpeg|png|gif)$/i, // Added rule for images
-                use: [
-                    {
-                        loader: 'file-loader',
-                        options: {
-                            name: '[name].[hash].[ext]', // Format for image filenames
-                            outputPath: 'assets/images/', // Output directory for images
-                        },
-                    },
-                ],
-            },
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                use: {
+                    loader: 'url-loader?limit=100000'
+                }
+            }
         ],
     },
     plugins: [

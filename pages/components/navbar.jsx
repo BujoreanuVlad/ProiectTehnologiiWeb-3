@@ -4,7 +4,7 @@ import "./navbar.css";
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-  const username = "John Doe";
+  const username = "Jane Doe";
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);

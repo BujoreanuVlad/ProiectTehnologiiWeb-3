@@ -6,7 +6,7 @@
     height: 105vh; 
     padding: 20px; 
     box-sizing: border-box;
-    background: url('./resource/8037194.jpg');
+    background: url('/resource/8037194.png');
     background-size: cover;
 }
 

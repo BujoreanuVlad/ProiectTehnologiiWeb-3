@@ -8,9 +8,9 @@ const {genCodAcces }= require("../utils.js")
 
 const Eveniment = sequelize.define('event', {
     id: {
-        type: DataTypes.UUID,
-        defaultValue:UUIDV4,
-        primaryKey: true
+      primaryKey: true,
+      type: DataTypes.INTEGER,
+      autoIncrement: true,
     }, 
      nume: {
         type:DataTypes.STRING,
@@ -47,10 +47,10 @@ const Eveniment = sequelize.define('event', {
         defaultValue: 'CLOSED'
      },
 	 idGrup: {
-        type: DataTypes.UUID,
-		allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false
 	 }
-})
+}, {timestamps: false})
 
 // export default Eveniment;
 module.exports = Eveniment;

@@ -2,6 +2,8 @@ import React from "react";
 import "./events.css";
 import EventGroup from "./EventGroup.jsx";
 import { NavLink } from "react-router-dom";
+import {useState, useEffect} from "react";
+import {getGrupEvenimenteAll} from "../api.jsx";
 
 // example data for events
 const eventGroupsData = [
@@ -58,9 +60,27 @@ const eventGroupsData = [
 ];
 
 const Events = () => {
+  
+  const [grupuriEvenimente, setGrupuriEvenimente] = useState([]);
+  const getGrupuriEvenimente = () => {
+    getGrupEvenimenteAll()
+    .then((response) => {
+      if(response.status == 200) {
+        setGrupuriEvenimente(response.data);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    })
+  }
+
+useEffect(() => {
+  getGrupuriEvenimente();
+}, []);
+
   return (
     <div className="container">
-      {/* HEADER */}
+      {/* HEADER -- de schimbat cu navbar*/}
       <div className="top-bar">
         <div className="profile">
           <div className="circle"></div>
@@ -73,8 +93,8 @@ const Events = () => {
 
       {/* Page Content - Events */}
       <div className="content">
-        {eventGroupsData.map((events, index) => (
-          <EventGroup key={index} events={events} />
+        {grupuriEvenimente.map((group, index) => (
+          <EventGroup key={index} eventGroup={group} />
         ))}
       </div>
     </div>

@@ -1,26 +1,25 @@
 import React from "react";
 import EventCard from "./EventCard.jsx";
-import { NavLink } from "react-router-dom";
-import {useState, useEffect} from "react";
-import {getEvenimenteByGrupId} from "../api.jsx";
+import { Link } from "react-router-dom";  // Schimbăm NavLink cu Link
+import { useState, useEffect } from "react";
+import { getEvenimenteByGrupId } from "../api.jsx";
+import "./eventGroup.css";
 
-
-const EventGroup = ({eventGroup}) => {
-
+const EventGroup = ({ eventGroup }) => {
   const [events, setEvents] = useState([]);
 
   const getEvenimente = () => {
     getEvenimenteByGrupId(eventGroup.id)
-    .then((response) => {
-      if(response.status == 200) {
-        console.log(response)
-        setEvents(response.data);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-  }
+      .then((response) => {
+        if (response.status === 200) {
+          console.log(response);
+          setEvents(response.data);
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   useEffect(() => {
     getEvenimente();
@@ -30,9 +29,9 @@ const EventGroup = ({eventGroup}) => {
     <div className="event-group">
       <h2>{eventGroup.nume}</h2>
       {events.map((event, index) => (
-        <NavLink key={index} to={`/events/${event.id}`}>
+        <Link key={index} to={`/events/${event.id}`}>  
           <EventCard event={event} />
-        </NavLink>
+        </Link>
       ))}
     </div>
   );

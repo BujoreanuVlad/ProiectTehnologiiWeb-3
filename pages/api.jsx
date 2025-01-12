@@ -14,3 +14,18 @@ export async function getEvenimenteByGrupId(id) {
         { "Content-Type": "application/json" }
     );
 }
+
+export async function getEvenimentId(id) {
+    return await axios.get(
+        "eveniment/getById/" + id,
+        { "Content-Type": "application/json" }
+    );
+}
+
+
+export async function getParticipantsByEvenimentId(id) {
+    return await axios.get(
+        "inscrieri/event/" + id,
+        { "Content-Type": "application/json" }
+    );
+}

@@ -1,0 +1,45 @@
+.participants-section {
+    width: 100%;
+    margin-top: 30px;
+    background-color: #fff8f0;
+    border-radius: 15px;
+    padding: 20px;
+    border: 1px solid #f3dbc5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+.participants-section h2 {
+font-size: 24px;
+color: #b8544f;
+margin-bottom: 20px;
+text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+text-align: center;
+}
+
+.participants-table {
+width: 100%;
+border-collapse: collapse;
+font-size: 16px;
+color: #4a3831;
+text-align: left;
+}
+
+.participants-table th,
+.participants-table td {
+padding: 12px 15px;
+border: 1px solid #f3dbc5;
+}
+
+.participants-table th {
+background-color: #d6cab9;
+color: #4a3831;
+font-weight: bold;
+text-transform: uppercase;
+}
+
+.participants-section p {
+font-size: 18px;
+color: #4a3831;
+text-align: center;
+margin: 20px 0;
+}

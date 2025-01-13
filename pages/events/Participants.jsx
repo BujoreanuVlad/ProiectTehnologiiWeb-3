@@ -35,8 +35,9 @@ const Participants = () => {
 
   return (
     <div className="participants-section">
-      <h2>Participanți</h2>
-      {participants.length > 0 ? (
+    <h2>Participanți</h2>
+    {participants.length > 0 ? (
+      <div className="participants-table-container">
         <table className="participants-table">
           <thead>
             <tr>
@@ -59,10 +60,15 @@ const Participants = () => {
             ))}
           </tbody>
         </table>
-      ) : (
-        <p>Nu există participanți pentru acest eveniment.</p>
-      )}
-    </div>
+      </div>
+    ) : (
+      <p>Nu există participanți pentru acest eveniment.</p>
+    )}
+    <button className="download-button">
+          Descarcă lista participanți
+        </button>
+  </div>
+  
   );
 };
 

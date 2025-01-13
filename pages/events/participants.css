@@ -1,45 +1,77 @@
 .participants-section {
-    width: 100%;
-    margin-top: 30px;
-    background-color: #fff8f0;
-    border-radius: 15px;
-    padding: 20px;
-    border: 1px solid #f3dbc5;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  }
-  
+  width: 100%;
+  margin-top: 30px;
+  background-color: #fff8f0;
+  border-radius: 15px;
+  padding: 20px;
+  border: 1px solid #f3dbc5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
 .participants-section h2 {
-font-size: 24px;
-color: #b8544f;
-margin-bottom: 20px;
-text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
-text-align: center;
+  font-size: 24px;
+  color: #b8544f;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.participants-table-container {
+  max-height: calc(5 * 50px); 
+  overflow-y: auto;
+  border: 1px solid #f3dbc5;
+  border-radius: 10px;
 }
 
 .participants-table {
-width: 100%;
-border-collapse: collapse;
-font-size: 16px;
-color: #4a3831;
-text-align: left;
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  color: #4a3831;
+  text-align: left;
 }
 
 .participants-table th,
 .participants-table td {
-padding: 12px 15px;
-border: 1px solid #f3dbc5;
+  padding: 12px 15px;
+  border: 1px solid #f3dbc5;
 }
 
 .participants-table th {
-background-color: #d6cab9;
-color: #4a3831;
-font-weight: bold;
-text-transform: uppercase;
+  background-color: #d6cab9;
+  color: #4a3831;
+  font-weight: bold;
+  text-transform: uppercase;
+  position: sticky; 
+  top: 0;
+  z-index: 1;
 }
 
 .participants-section p {
-font-size: 18px;
-color: #4a3831;
-text-align: center;
-margin: 20px 0;
+  font-size: 18px;
+  color: #4a3831;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.download-button {
+  display: block;
+  margin: 20px auto;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(45deg, #b8544f, #933c3a);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.download-button:hover {
+  background: linear-gradient(45deg, #933c3a, #b8544f);
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }

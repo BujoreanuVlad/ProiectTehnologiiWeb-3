@@ -49,6 +49,10 @@ const Eveniment = sequelize.define('event', {
 	 idGrup: {
         type: DataTypes.UUID,
 		allowNull: false
+	 },
+	 imagineEveniment: {
+		 type: DataTypes.TEXT,
+		 allowNull: false
 	 }
 })
 

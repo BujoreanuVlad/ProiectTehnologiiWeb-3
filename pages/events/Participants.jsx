@@ -33,6 +33,38 @@ const Participants = () => {
     });
   };
 
+  const downloadCSV = () => {
+    // CSV header
+    const headers = ["Nume", "Prenume", "Telefon", "Email", "Data nașterii"];
+    // Convert participants data to CSV rows
+    const rows = participants.map((participant) => [
+      participant.nume,
+      participant.prenume,
+      participant.nrTelefon,
+      participant.email,
+      formatDate(participant.dataNastere),
+    ]);
+
+    // Combine header and rows into CSV format
+    const csvContent =
+        [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
+
+    // Create a Blob with CSV content
+    const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+
+    // Create a link element for the download
+    const link = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    link.setAttribute("href", url);
+    link.setAttribute(
+        "download",
+        `participants_event_${eventId}.csv` // Filename for the downloaded file
+    );
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="participants-section">
     <h2>Participanți</h2>
@@ -64,7 +96,7 @@ const Participants = () => {
     ) : (
       <p>Nu există participanți pentru acest eveniment.</p>
     )}
-    <button className="download-button">
+    <button className="download-button" onClick={downloadCSV}>
           Descarcă lista participanți
         </button>
   </div>

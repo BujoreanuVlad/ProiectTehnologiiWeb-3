@@ -1,14 +1,14 @@
-import React, { useState } from "react";
+import React, {useContext, useState} from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "./navbarAdmin.css";
+import {ModalContext} from "../pages/main.jsx";
 
-const NavbarAdmin = () => {
+const NavbarAdmin = ({ onShowGroupModal, onShowEventModal }) => {
+  const { setShowGroupModal, setShowEventModal } = useContext(ModalContext);
   const [isDropdownOpen, setDropdownOpen] = useState(false);
-
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
-
   const handleLogout = () => {
     console.log("Delogare...");
   };
@@ -21,18 +21,18 @@ const NavbarAdmin = () => {
 
       <div className="navbar-right">
         <div className="user-info">
-          <button>Adaugă grup evenimente</button>
-          <button>Adaugă eveniment</button>
+          <button onClick={() => setShowGroupModal(true)}>Adaugă grup evenimente</button>
+          <button onClick={() => setShowEventModal(true)}>Adaugă eveniment</button>
           <span>Admin</span>
           <button className="user-icon" onClick={toggleDropdown}>
-            <FaUserCircle size={30} />
+            <FaUserCircle size={30}/>
           </button>
           {isDropdownOpen && (
-            <div className="dropdown-menu">
-              <ul>
-                <li onClick={handleLogout}>Delogare</li>
-              </ul>
-            </div>
+              <div className="dropdown-menu">
+                <ul>
+                  <li onClick={handleLogout}>Delogare</li>
+                </ul>
+              </div>
           )}
         </div>
       </div>

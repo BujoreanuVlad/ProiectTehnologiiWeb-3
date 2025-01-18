@@ -8,7 +8,7 @@ const {DataTypes, UUIDV4} = require('sequelize')
 const GrupEvenimente = sequelize.define('event_group', {
     id: {
         primaryKey: true,
-        type: DataTypes.INTEGER,
+        type: DataTypes.UUIDV4,
         autoIncrement: true,
     }
 ,

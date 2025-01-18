@@ -1,0 +1,144 @@
+.event-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 80%;
+  padding: 30px;
+  background-color: #d6cab9;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: "Arial", sans-serif;
+  margin-top: 100px; 
+}
+
+.event-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.event-title {
+  flex: 2;
+}
+
+.event-title h1 {
+  font-size: 32px;
+  margin: 0;
+  color: #b8544f;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-title p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #4a3831;
+}
+
+.event-details-right {
+  flex: 1;
+  text-align: right;
+  font-size: 16px;
+  color: #4a3831;
+}
+
+.event-details-right p {
+  margin: 5px 0;
+}
+
+.event-details-body {
+  width: 100%;
+  padding: 20px;
+  background-color: #fff8f0;
+  border-radius: 10px;
+  border: 1px solid #f3dbc5;
+  color: #4a3831;
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.invite-button {
+  margin-top: 20px;
+  padding: 12px 25px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background: linear-gradient(45deg, #d40000, #ff4500);
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.invite-button:hover {
+  background: linear-gradient(45deg, #ff4500, #d40000);
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-family: inherit;
+}
+
+h2 {
+  font-size: 24px;
+  color: #d32f2f;
+  margin-bottom: 15px;
+}
+
+.date-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.date-item {
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #00796b;
+  border-radius: 40px;
+  cursor: pointer;
+  background: #e8f5e9;
+}
+
+.date-item:hover,
+.date-item.selected {
+  background: #f1f8e9;
+  border-color: #d32f2f;
+  font-weight: bold;
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 30px;
+}
+
+.edit-button {
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #b8544f;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.edit-button:hover {
+  background-color: #933c3a;
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}

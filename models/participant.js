@@ -63,6 +63,6 @@ const Participant = sequelize.define('participant', {
             this.setDataValue('password', crypto.AES.encrypt(value, "cheie magica").toString());
         }
      }
-})
+}, {timestamps: false})
 
 module.exports = Participant;

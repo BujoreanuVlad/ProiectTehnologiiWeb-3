@@ -1,0 +1,142 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.custom-modal {
+    width: 420px;
+    max-height: 600px; /* Setează o înălțime maximă fixă pentru modal */
+    background: #fbf8f2;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 30px 40px;
+    color: #333;
+    text-align: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto; /* Permite scroll în cazul în care conținutul este prea mare */
+}
+
+.custom-modal h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.modal-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Asigură un spațiu uniform între toate elementele */
+}
+
+.modal-form input,
+.modal-form textarea,
+.modal-form input[type="number"] {
+    width: 90%;
+    max-width: 350px;
+    height: 40px;
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    outline: none;
+    border-radius: 40px;
+    font-size: 16px;
+    padding: 10px 15px;
+    color: #333;
+    margin: 10px 0; /* Adăugăm un margin între toate inputurile și textarea */
+}
+
+.modal-form input[type="file"] {
+    width: 90%;
+    max-width: 350px;
+    margin: 10px 0; /* Adăugăm un margin între inputurile de fișiere și celelalte elemente */
+}
+
+.modal-form button {
+    width: auto;
+    max-width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    background: #5e0001;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 700;
+    transition: background-color 0.3s;
+    margin-top: 20px; /* Distanță între ultimul input și buton */
+    white-space: nowrap;
+    overflow: hidden;
+    text-align: center;
+}
+
+.modal-form .add-event-btn {
+    margin-top: 100px; /* Prioritate mai mare */
+}
+
+
+
+.modal-form button:hover {
+    background: #933c3a;
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.close-btn:hover {
+    background: #ff1a1a;
+    transform: rotate(90deg);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px; /* Asigură o distanță între buton și restul formularului */
+}
+
+.modal-form textarea {
+    height: 120px;
+    border-radius: 10px;
+    margin: 10px 0; /* Adăugăm distanță între textarea și alte câmpuri */
+}
+
+.modal-form input[type="number"] {
+    height: 40px;
+    margin: 10px 0; /* Adăugăm distanță între câmpurile de input */
+}
+
+.modal-form input::placeholder,
+.modal-form textarea::placeholder {
+    color: #888888; /* Gri deschis */
+    opacity: 1; /* Asigură că este vizibil complet */
+}

@@ -7,14 +7,18 @@ const {DataTypes, UUIDV4} = require('sequelize')
 
 const GrupEvenimente = sequelize.define('event_group', {
     id: {
-        type: DataTypes.UUID,
-        defaultValue:UUIDV4,
-        primaryKey: true
-    },
+        primaryKey: true,
+        type: DataTypes.INTEGER,
+        autoIncrement: true,
+    }
+,
     nume: {
         type:DataTypes.STRING,
         allowNull: false
      }
+}, 
+{
+   timestamps: false,
 })
 
 module.exports = GrupEvenimente;

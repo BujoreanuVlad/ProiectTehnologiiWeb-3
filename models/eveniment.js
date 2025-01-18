@@ -2,7 +2,7 @@ const sequelize = require('../sequelize.js')
 // const { sequelize } = await import('../sequelize.js')
 
 // const {DataTypes, UUIDV4} = await import('sequelize')
-const {DataTypes, UUIDV4} = require('sequelize')
+const {DataTypes, UUIDV4, INTEGER} = require('sequelize')
 // const { genCodAcces } = await import("../utils.js")
 const {genCodAcces }= require("../utils.js")
 
@@ -47,8 +47,16 @@ const Eveniment = sequelize.define('event', {
         defaultValue: 'CLOSED'
      },
 	 idGrup: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+        type: DataTypes.INTEGER,
+		allowNull: false
+	 },
+	 imagineEveniment: {
+		 type: DataTypes.TEXT,
+		 allowNull: false
+	 },
+	 descriereEveniment: {
+		 type: DataTypes.TEXT,
+		 allowNull: false
 	 }
 }, {timestamps: false})
 

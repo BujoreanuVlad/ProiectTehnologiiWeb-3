@@ -1,164 +1,139 @@
-import React, {useEffect, useState} from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import { getGrupEvenimenteAll } from "../pages/api.jsx";
-import "./AddEventGroupModal.css";
+import React, { useState } from 'react';
+import './AddEventGroupModal.css';
 
-const AddEventModal = ({ show, handleClose, handleAddEvent, groups }) => {
-    const [grupuriEvenimente, setGrupuriEvenimente] = useState([]);
-    const [eventData, setEventData] = useState({
-        name: '',
-        openDate: '',
-        interval: 0,
-        availableSeats: 0,
-        accessCode: '',
-        status: 'OPEN',
-        groupId: '',
-        imageUrl: '',
-    });
-    const fetchGrupuriEvenimente = async () => {
-        try {
-            const response = await getGrupEvenimenteAll();
-            if (response.status === 200) {
-                setGrupuriEvenimente(response.data);
-                console.log("Add Event ", response.data); // Log after data is updated
-            }
-        } catch (error) {
-            console.error("Error fetching event groups: ", error);
+const AddEvent = ({ show, onClose, onAddEvent }) => {
+    const [eventName, setEventName] = useState('');
+    const [eventDate, setEventDate] = useState('');
+    const [eventLocation, setEventLocation] = useState('');
+    const [eventInterval, setEventInterval] = useState('');
+    const [availableSeats, setAvailableSeats] = useState('');
+    const [eventDescription, setEventDescription] = useState('');
+    const [image, setImage] = useState(null);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file);
         }
     };
 
-    useEffect(() => {
-        if (show) {
-            fetchGrupuriEvenimente();
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (eventName.trim() !== '' && eventDate && eventLocation.trim() !== '') {
+            const eventData = {
+                name: eventName,
+                date: eventDate,
+                location: eventLocation,
+                interval: eventInterval,
+                availableSeats: availableSeats,
+                description: eventDescription,
+                image: image,
+            };
+            onAddEvent(eventData);
+            setEventName('');
+            setEventDate('');
+            setEventLocation('');
+            setEventInterval('');
+            setAvailableSeats('');
+            setEventDescription('');
+            setImage(null);
+            onClose();
         }
-    }, [show]);
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setEventData((prev) => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = () => {
-        handleAddEvent(eventData);
-        setEventData({
-            name: '',
-            openDate: '',
-            interval: 0,
-            availableSeats: 0,
-            accessCode: '',
-            status: 'OPEN',
-            groupId: '',
-            imageUrl: '',
-        });
-        handleClose();
-    };
+    if (!show) return null;
 
     return (
-        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered>
-
-        <Modal.Header closeButton>
-                <Modal.Title>Adaugă Eveniment</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
-                    <Form.Group controlId="eventName">
-                        <Form.Label>Nume</Form.Label>
-                        <Form.Control
+        <div className="modal-overlay">
+            <div className="custom-modal">
+                <button className="close-btn" onClick={onClose}>
+                    &times;
+                </button>
+                <h2>Adaugă Eveniment</h2>
+                <form className="modal-form" onSubmit={handleSubmit}>
+                    <div className="input-box">
+                        <label htmlFor="eventName">Nume Eveniment</label>
+                        <input
                             type="text"
+                            id="eventName"
                             placeholder="Introdu numele evenimentului"
-                            name="name"
-                            value={eventData.name}
-                            onChange={handleChange}
+                            value={eventName}
+                            onChange={(e) => setEventName(e.target.value)}
+                            required
                         />
-                    </Form.Group>
-                    <Form.Group controlId="eventOpenDate">
-                        <Form.Label>Data Deschidere</Form.Label>
-                        <Form.Control
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="eventDate">Data și Ora Evenimentului</label>
+                        <input
                             type="datetime-local"
-                            name="openDate"
-                            value={eventData.openDate}
-                            onChange={handleChange}
+                            id="eventDate"
+                            value={eventDate}
+                            onChange={(e) => setEventDate(e.target.value)}
+                            required
                         />
-                    </Form.Group>
-                    <Form.Group controlId="eventInterval">
-                        <Form.Label>Interval</Form.Label>
-                        <Form.Control
-                            type="number"
-                            placeholder="Introdu intervalul"
-                            name="interval"
-                            value={eventData.interval}
-                            onChange={handleChange}
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="eventLocation">Locația Evenimentului</label>
+                        <input
+                            type="text"
+                            id="eventLocation"
+                            placeholder="Introdu locația evenimentului"
+                            value={eventLocation}
+                            onChange={(e) => setEventLocation(e.target.value)}
+                            required
                         />
-                    </Form.Group>
-                    <Form.Group controlId="eventAvailableSeats">
-                        <Form.Label>Nr Locuri Disponibile</Form.Label>
-                        <Form.Control
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="eventInterval">Interval Eveniment (minute)</label>
+                        <input
                             type="number"
+                            id="eventInterval"
+                            placeholder="Introdu intervalul în minute"
+                            value={eventInterval}
+                            onChange={(e) => setEventInterval(e.target.value)}
+                            min="1"
+                            required
+                        />
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="availableSeats">Număr Locuri Disponibile</label>
+                        <input
+                            type="number"
+                            id="availableSeats"
                             placeholder="Introdu numărul de locuri disponibile"
-                            name="availableSeats"
-                            value={eventData.availableSeats}
-                            onChange={handleChange}
+                            value={availableSeats}
+                            onChange={(e) => setAvailableSeats(e.target.value)}
+                            min="1"
+                            required
                         />
-                    </Form.Group>
-                    <Form.Group controlId="eventAccessCode">
-                        <Form.Label>Cod Acces</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Introdu codul de acces"
-                            name="accessCode"
-                            value={eventData.accessCode}
-                            onChange={handleChange}
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="image">Încarcă Imagine</label>
+                        <input
+                            type="file"
+                            id="image"
+                            accept="image/*"
+                            onChange={handleImageChange}
                         />
-                    </Form.Group>
-                    <Form.Group controlId="eventStatus">
-                        <Form.Label>Stare</Form.Label>
-                        <Form.Control
-                            as="select"
-                            name="status"
-                            value={eventData.status}
-                            onChange={handleChange}
-                        >
-                            <option value="OPEN">OPEN</option>
-                            <option value="CLOSED">CLOSED</option>
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="eventGroupId">
-                        <Form.Label>Grup</Form.Label>
-                        <Form.Control
-                            as="select"
-                            name="groupId"
-                            value={eventData.groupId}
-                            onChange={handleChange}
-                        >
-                            <option value="">Selectează un grup</option>
-                            {grupuriEvenimente.map((group) => (
-                                <option key={group.id} value={group.id}>
-                                    {group.nume}
-                                </option>
-                            ))}
-                        </Form.Control>
-                    </Form.Group>
-                    <Form.Group controlId="eventImageUrl">
-                        <Form.Label>Imagine Eveniment</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="Introdu URL-ul imaginii"
-                            name="imageUrl"
-                            value={eventData.imageUrl}
-                            onChange={handleChange}
+                    </div>
+                    <div className="input-box">
+                        <label htmlFor="eventDescription">Descriere Eveniment</label>
+                        <textarea
+                            id="eventDescription"
+                            placeholder="Introdu descrierea evenimentului"
+                            value={eventDescription}
+                            onChange={(e) => setEventDescription(e.target.value)}
                         />
-                    </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
-                    Închide
-                </Button>
-                <Button variant="primary" onClick={handleSubmit}>
-                    Adaugă Eveniment
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                    </div>
+                    <div className="modal-actions">
+                        <button type="submit" className="add-event-btn">
+                            Adaugă Eveniment
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 };
 
-export default AddEventModal;
+export default AddEvent;

@@ -1,49 +1,48 @@
-import React, {useEffect, useState} from 'react';
-import { Modal, Button, Form } from 'react-bootstrap';
-import "./AddEventGroupModal.css";
+import React, { useState } from 'react';  
+import './AddEventGroupModal.css'; 
 
-const AddEventGroupModal = ({ show, handleClose, handleAddGroup }) => {
+const AddEventGroup = ({ show, onClose, onAddGroup }) => {
     const [groupName, setGroupName] = useState('');
 
-    const handleSubmit = () => {
-        handleAddGroup({ name: groupName });
-        setGroupName('');
-        handleClose();
-    };
-    useEffect(() => {
-        if (show) {
-            console.log("");
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (groupName.trim() !== '') {
+            onAddGroup({ name: groupName });
+            setGroupName('');
+            onClose(); // Închide modalul după adăugare
         }
-    }, [show]);
-    return (
-        <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} centered >
+    };
 
-        <Modal.Header closeButton>
-                <Modal.Title>Adaugă Grup de Evenimente</Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-                <Form>
-                    <Form.Group controlId="groupName">
-                        <Form.Label>Nume Grup</Form.Label>
-                        <Form.Control
+    if (!show) return null; // Dacă show este false, nu afișa modalul
+
+    return (
+        <div className="modal-overlay">
+            <div className="custom-modal">
+                <button className="close-btn" onClick={onClose}>
+                    &times;
+                </button>
+                <h2>Adaugă Grup de Evenimente</h2>
+                <form className="modal-form" onSubmit={handleSubmit}>
+                    <div className="input-box">
+                        <label htmlFor="groupName">Nume Grup</label>
+                        <input
                             type="text"
+                            id="groupName"
                             placeholder="Introdu numele grupului"
                             value={groupName}
                             onChange={(e) => setGroupName(e.target.value)}
+                            required
                         />
-                    </Form.Group>
-                </Form>
-            </Modal.Body>
-            <Modal.Footer className="footer">
-                <Button variant="secondary" onClick={handleClose}>
-                    Închide
-                </Button>
-                <Button variant="primary" onClick={handleSubmit}>
-                    Adaugă Grup
-                </Button>
-            </Modal.Footer>
-        </Modal>
+                    </div>
+                    <div className="modal-actions">
+                        <button type="submit" className="btn primary">
+                            Adaugă Grup
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     );
 };
 
-export default AddEventGroupModal;
+export default AddEventGroup;

@@ -9,8 +9,8 @@ const {genCodAcces }= require("../utils.js")
 const Eveniment = sequelize.define('event', {
     id: {
       primaryKey: true,
-      type: DataTypes.UUIDV4,
-      autoIncrement: true,
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4
     }, 
      nume: {
         type:DataTypes.STRING,
@@ -47,7 +47,7 @@ const Eveniment = sequelize.define('event', {
         defaultValue: 'CLOSED'
      },
 	 idGrup: {
-        type: DataTypes.UUIDV4,
+        type: DataTypes.UUID,
 		allowNull: false
 	 },
 	 imagineEveniment: {

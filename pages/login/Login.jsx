@@ -1,19 +1,42 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
-import './app.css'
-import './modal.css'
+import './app.css';
+import './modal.css';
 import Snowfall from './Snow.jsx';
 import Cookies from 'universal-cookie';
-import './snow.css'
+import './snow.css';
+import { loginUser } from '../api.jsx';
+
 export default function Login() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-	const cookies = new Cookies()
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
+    const cookies = new Cookies();
 
-	cookies.set("hello", "world")
+    cookies.set("hello", "world");
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
+
+    const handleLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const result = await loginUser(username, password);
+            if (result.ok) {
+                console.log("Autentificare reușită:", result);
+                cookies.set("authToken", result.token, { path: '/' }); 
+                setErrorMessage(''); 
+            } else {
+                setErrorMessage("Autentificare eșuată. Verifică username-ul și parola.");
+            }
+        } catch (error) {
+            setErrorMessage("Eroare la autentificare. Te rugăm să încerci din nou.");
+            console.error("Eroare:", error);
+        }
+    };
+
     return (
         <div className='main-container'>
             <Snowfall />
@@ -21,18 +44,31 @@ export default function Login() {
                 Events App
             </div>
             <div className='wrapper'>
-                <form action="">
+                <form onSubmit={handleLogin}>
                     <h1>Login</h1>
                     <div className='input-box'>
-                        <input type='text' placeholder='Username' required />
+                        <input 
+                            type='text' 
+                            placeholder='Username' 
+                            value={username} 
+                            onChange={(e) => setUsername(e.target.value)} 
+                            required 
+                        />
                         <FaUser className='icon' />
                     </div>
                     <div className='input-box'>
-                        <input type='password' placeholder='Password' required />
+                        <input 
+                            type='password' 
+                            placeholder='Password' 
+                            value={password} 
+                            onChange={(e) => setPassword(e.target.value)} 
+                            required 
+                        />
                         <FaLock className='icon' />
                     </div>
 
                     <button type="submit">Login</button>
+                    {errorMessage && <p className="error-message">{errorMessage}</p>}
 
                     <div className='register-link'>
                         <p>Don't have an account? 

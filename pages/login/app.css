@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body {
+    background: url("../../resource/8037194.jpg");
+    background-size: cover;
+    font-family: 'Poppins', sans-serif; 
+
+}
+
 .main-container {
     display: flex;
     flex-direction: column; 
@@ -22,46 +31,48 @@
     backdrop-filter: blur(30px);
 }
 
-
-.wrapper {
-    width:420px;
-    background-color: transparent;
-    border-radius: 10px;
-    border: 2px solid rgba(255, 255, 255, .2);
-    backdrop-filter: blur(30px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
-    color: #ffff;
-    border-radius: 10px;
-    padding: 30px 40px;
-}
-
 .wrapper h1 {
     font-size: 36px;
     text-align: center;
 }
 
+.wrapper {
+    width: 100%; /* Ajustează dimensiunea la 100% din containerul părinte */
+    max-width: 420px; /* Limitează lățimea maximă */
+    background-color: transparent;
+    border-radius: 10px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    padding: 30px 40px;
+    box-sizing: border-box; /* Include padding și border în dimensiune */
+}
+
 .wrapper .input-box {
     position: relative;
-    width: 100%;
+    width: 100%; /* Se adaptează la dimensiunea containerului părinte */
     height: 50px;
-    margin: 30px 0;
+    margin: 20px 0; /* Ajustează marginile pentru a evita suprapunerile */
+    box-sizing: border-box;
 }
 
 .input-box input {
-    width: 100%;
-    height: 100%;
+    width: 100%; /* Lățime completă în containerul părinte */
+    height: 100%; /* Înălțime completă */
     background: transparent;
-    border:none;
-    border: 2px solid rgba(255, 255, 255, .2);
+    border: none;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     outline: none;
     border-radius: 40px;
     font-size: 16px;
-    color:#ffff;
-    padding: 20px 45px 20px 20px;
+    color: #fff;
+    padding: 0 45px 0 20px; /* Ajustează padding-ul */
+    box-sizing: border-box; /* Include padding și border în dimensiuni */
 }
 
 .input-box input::placeholder {
-    color:#ffff;
+    color: #fff;
 }
 
 .input-box .icon {
@@ -70,16 +81,18 @@
     top: 50%;
     transform: translateY(-50%);
     font-size: 16px;
+    color: #fff; /* Adaugă culoare pentru icon */
+    pointer-events: none; /* Evită să fie clicabil */
 }
 
 .wrapper button {
     width: 100%;
-    height:45px;
-    background: #ffff;
+    height: 45px;
+    background: #fff;
     border: none;
     outline: none;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 16px;
     color: #333;
@@ -93,12 +106,12 @@
 }
 
 .register-link p a {
-    color: #ffff;
+    color: #fff;
     text-decoration: none;
     font-weight: 600;
     margin-left: 20px;
 }
 
-.register-link p a:hover{
+.register-link p a:hover {
     text-decoration: underline;
 }

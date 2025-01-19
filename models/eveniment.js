@@ -51,7 +51,7 @@ const Eveniment = sequelize.define('event', {
 		allowNull: false
 	 },
 	 imagineEveniment: {
-		 type: DataTypes.TEXT,
+		 type: DataTypes.TEXT('long'),
 		 allowNull: false
 	 },
 	 descriereEveniment: {

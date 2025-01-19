@@ -140,3 +140,41 @@
     color: #888888; /* Gri deschis */
     opacity: 1; /* Asigură că este vizibil complet */
 }
+.modal-form select {
+    width: 100%;
+    max-width: 400px;
+    height: 60px; /* Dimensiune similară cu celelalte inputuri */
+    background: transparent;
+    border: 2px solid rgba(0, 0, 0, 0.3);
+    outline: none;
+    border-radius: 40px; /* Colțuri rotunjite ca celelalte inputuri */
+    font-size: 16px;
+    padding: 10px 15px; /* Padding similar cu inputurile */
+    color: #333;
+    margin: 10px 0; /* Adăugăm un margin între toate elementele */
+    -webkit-appearance: none; /* Elimină stilurile implicite pentru select pe unele browsere */
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.modal-form select:focus {
+    border-color: #5e0001; /* Culoare border la focus */
+    box-shadow: 0 0 5px rgba(94, 0, 1, 0.5); /* Umbră la focus */
+}
+
+/* Reînviem săgețile */
+.modal-form select::-ms-expand {
+    display: none; /* Ascunde săgeata pe IE */
+}
+
+.modal-form select {
+    -webkit-appearance: none; /* Elimină stilurile implicite de săgeată pe Safari */
+    -moz-appearance: none;
+    appearance: none;
+    padding-right: 30px; /* Lasă spațiu pentru săgeată */
+}
+
+.modal-form select option {
+    background: #fff;
+    color: #333;
+}

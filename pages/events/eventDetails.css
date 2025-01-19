@@ -13,7 +13,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   font-family: "Arial", sans-serif;
-  margin-top: 100px; 
+  margin-top: 40px; 
 }
 
 .event-header {
@@ -62,6 +62,10 @@
   line-height: 1.6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
+  overflow: auto; /* Permite scroll dacă textul depășește înălțimea */
+  max-height: 300px; /* Limitează înălțimea maximă */
+  word-wrap: break-word; /* Rupe liniile lungi care ar putea depăși containerul */
+  box-sizing: border-box; /* Include padding și border în dimensiuni */
 }
 
 .invite-button {
@@ -141,4 +145,42 @@ h2 {
   background-color: #933c3a;
   transform: scale(1.1);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.event-title {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* Spațiu între imagine și text */
+  flex: 2;
+}
+
+.event-title img.event-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  object-fit: cover; /* Ajustează imaginea pentru a se potrivi în container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.event-title h1 {
+  font-size: 32px;
+  margin: 0;
+  color: #b8544f;
+  text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+
+.event-title p {
+  margin-top: 10px;
+  font-size: 18px;
+  color: #4a3831;
+}
+
+.event-details-body {
+  padding: 20px;
+  background-color: #fff8f0;
+  border-radius: 10px;
+  border: 1px solid #f3dbc5;
+  color: #4a3831;
+  line-height: 1.6;
+  margin-top: 20px;
 }

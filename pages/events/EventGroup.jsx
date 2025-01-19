@@ -36,5 +36,4 @@ const EventGroup = ({ eventGroup }) => {
     </div>
   );
 };
-
 export default EventGroup;

@@ -29,3 +29,33 @@ export async function getParticipantsByEvenimentId(id) {
         { "Content-Type": "application/json" }
     );
 }
+
+export async function addGrupEvenimente(groupName) {
+    try {
+        const response = await axios.post('grupEvenimente/create', {
+            nume: groupName,
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data; 
+    } catch (error) {
+        console.error("Eroare la adăugarea grupului:", error);
+        throw error;
+    }
+}
+
+export async function addEveniment(eventData) {
+    try {
+        const response = await axios.post('/eveniment/create', eventData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data; 
+    } catch (error) {
+        console.error("Eroare la adăugarea evenimentului:", error);
+        throw error; 
+    }
+}

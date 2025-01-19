@@ -1,19 +1,46 @@
-import React, { useState } from 'react';  
+import React, { useState } from 'react';
+import { toast } from 'react-toastify';
+import { addGrupEvenimente } from '../pages/api.jsx'; // Importă funcția
 import './AddEventGroupModal.css'; 
+
 
 const AddEventGroup = ({ show, onClose, onAddGroup }) => {
     const [groupName, setGroupName] = useState('');
+    const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        if (groupName.trim() !== '') {
-            onAddGroup({ name: groupName });
-            setGroupName('');
-            onClose(); // Închide modalul după adăugare
-        }
+    const validateForm = () => {
+        const errObj = {};
+
+        if (!groupName.trim() || !groupName.match("^[a-zA-Z]+$")) {
+            errObj.groupName = "Numele trebuie să conțina doar litere!";
+          }
+
+        setErrors(errObj);
+        return Object.keys(errObj).length; 
     };
 
-    if (!show) return null; // Dacă show este false, nu afișa modalul
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        
+        if(!validateForm()) {
+        try {
+            const response = await addGrupEvenimente(groupName);
+    
+            console.log("Grupul a fost adăugat cu succes:", response);
+    
+            onAddGroup({ name: groupName });
+            
+            setGroupName('');
+            onClose();
+        } catch (error) {
+            console.error("Eroare la adăugarea grupului:", error);
+            toast.error("A apărut o eroare la adăugarea grupului. Te rugăm să încerci din nou.");
+        }
+    }
+    };
+    
+
+    if (!show) return null;
 
     return (
         <div className="modal-overlay">
@@ -33,6 +60,7 @@ const AddEventGroup = ({ show, onClose, onAddGroup }) => {
                             onChange={(e) => setGroupName(e.target.value)}
                             required
                         />
+                        {errors.groupName && <small className="error">{errors.groupName}</small>}
                     </div>
                     <div className="modal-actions">
                         <button type="submit" className="btn primary">

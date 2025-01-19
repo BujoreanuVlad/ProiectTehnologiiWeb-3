@@ -49,10 +49,8 @@ const Participants = () => {
     const csvContent =
         [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
 
-    // Create a Blob with CSV content
     const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
 
-    // Create a link element for the download
     const link = document.createElement("a");
     const url = URL.createObjectURL(blob);
     link.setAttribute("href", url);

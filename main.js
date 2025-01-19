@@ -17,6 +17,7 @@ const evenimentRouter = require("./backendRoutes/evenimentRoute.js")
 const grupEvenimenteRouter = require("./backendRoutes/grupEvenimenteRoute.js")
 const participantRouter = require("./backendRoutes/participantRoute.js")
 const inscrieriRouter = require("./backendRoutes/inscriereEvenimentRoute.js")
+const authRouter = require("./backendRoutes/authRoute.js")
 
 const EvenimentORM = require("./models/eveniment.js")
 const GrupEvenimenteORM = require("./models/grupEvenimente.js")
@@ -50,6 +51,7 @@ app.use("/eveniment", evenimentRouter)
 app.use("/grupEvenimente", grupEvenimenteRouter)
 app.use("/participant", participantRouter)
 app.use("/inscrieri", inscrieriRouter)
+app.use("/auth", authRouter)
 
 router.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "dist/index.html"));

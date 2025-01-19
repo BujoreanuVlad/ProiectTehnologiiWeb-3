@@ -62,7 +62,7 @@ export async function addEveniment(eventData) {
 
 export async function loginUser(username, password) {
     try {
-        const response = await axios.post('/auth/login', {
+        const response = await axios.post('auth/login', {
             username: username,
             password: password
         }, {

@@ -10,8 +10,6 @@ authRouter.post("/login", async (req, res) => {
 	let username = req.body["username"]
 	let password = req.body["password"]
 
-	console.log("|" + password + "|")
-	
 	if (username === null || password === null) {
 		res.status(400).send("Error. Empty username or password")
 	}
@@ -33,7 +31,6 @@ authRouter.post("/login", async (req, res) => {
 			res.status(401).json({'ok': false})
 		}
 
-		console.log(user)
 	}
 })
 

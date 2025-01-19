@@ -6,6 +6,7 @@ import './modal.css';
 import Snowfall from './Snow.jsx';
 import Cookies from 'universal-cookie';
 import './snow.css';
+import CryptoJS from 'crypto-js';
 import { loginUser } from '../api.jsx';
 
 export default function Login() {
@@ -25,9 +26,27 @@ export default function Login() {
         try {
             const result = await loginUser(username, password);
             if (result.ok) {
-                console.log("Autentificare reușită:", result);
                 cookies.set("authToken", result.token, { path: '/' }); 
                 setErrorMessage(''); 
+
+				let token = CryptoJS.AES.decrypt(result.token, "cheie magica").toString(CryptoJS.enc.Utf8)
+				if (token.length < ";SECURITY_T0KEN".length || token.substring(token.length - ";SECURITY_T0KEN".length) !== ";SECURITY_T0KEN") {
+					setErrorMessage("Autentificare eșuată. Verifică username-ul și parola.");
+				}
+				else {
+					console.log("Log in successful")
+					let user = token.substring(0, token.length - ";SECURITY_T0KEN".length)
+					console.log(user)
+					if (user === "admin") {
+						//TODO Rutare
+						console.log("Rutare admin")
+					}
+					else {
+						//TODO Rutare
+						console.log("Rutare user");
+					}
+				}
+
             } else {
                 setErrorMessage("Autentificare eșuată. Verifică username-ul și parola.");
             }

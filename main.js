@@ -9,6 +9,10 @@ const mysql = require("mysql2");
 const router = express.Router()
 const app = express()
 
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+
+
 const evenimentRouter = require("./backendRoutes/evenimentRoute.js")
 const grupEvenimenteRouter = require("./backendRoutes/grupEvenimenteRoute.js")
 const participantRouter = require("./backendRoutes/participantRoute.js")
@@ -28,6 +32,7 @@ ParticipantORM.belongsToMany(EvenimentORM, {through: 'InscriereEveniment'})
 app.use(cors())
 app.use(express.json());
 app.use(express.static("dist"));
+
 
 const connection = mysql.createConnection({host: "localhost", user: "root", password: ""});
 connection.connect((err) => {

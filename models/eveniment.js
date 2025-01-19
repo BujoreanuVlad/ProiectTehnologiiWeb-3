@@ -2,15 +2,15 @@ const sequelize = require('../sequelize.js')
 // const { sequelize } = await import('../sequelize.js')
 
 // const {DataTypes, UUIDV4} = await import('sequelize')
-const {DataTypes, UUIDV4} = require('sequelize')
+const {DataTypes, UUIDV4, INTEGER} = require('sequelize')
 // const { genCodAcces } = await import("../utils.js")
 const {genCodAcces }= require("../utils.js")
 
 const Eveniment = sequelize.define('event', {
     id: {
-        type: DataTypes.UUID,
-        defaultValue:UUIDV4,
-        primaryKey: true
+      primaryKey: true,
+      type: DataTypes.UUID,
+      defaultValue: UUIDV4
     }, 
      nume: {
         type:DataTypes.STRING,
@@ -51,10 +51,14 @@ const Eveniment = sequelize.define('event', {
 		allowNull: false
 	 },
 	 imagineEveniment: {
+		 type: DataTypes.TEXT('long'),
+		 allowNull: false
+	 },
+	 descriereEveniment: {
 		 type: DataTypes.TEXT,
 		 allowNull: false
 	 }
-})
+}, {timestamps: false})
 
 // export default Eveniment;
 module.exports = Eveniment;

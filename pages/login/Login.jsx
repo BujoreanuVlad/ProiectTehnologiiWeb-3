@@ -4,9 +4,13 @@ import { FaLock } from "react-icons/fa";
 import './app.css'
 import './modal.css'
 import Snowfall from './Snow.jsx';
+import Cookies from 'universal-cookie';
 import './snow.css'
 export default function Login() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+	const cookies = new Cookies()
+
+	cookies.set("hello", "world")
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);

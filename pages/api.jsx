@@ -59,3 +59,21 @@ export async function addEveniment(eventData) {
         throw error; 
     }
 }
+
+export async function loginUser(username, password) {
+    try {
+        const response = await axios.post('/auth/login', {
+            username: username,
+            password: password
+        }, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data; 
+    } catch (error) {
+        console.error("Eroare la autentificare:", error);
+        throw error; 
+        
+    }
+}

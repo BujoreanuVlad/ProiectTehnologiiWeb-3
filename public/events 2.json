@@ -1,0 +1,17 @@
+[
+    {
+      "id": 1,
+      "date": "2024-12-17",
+      "title": "Eveniment 1",
+      "description": "Descriere eveniment 1",
+      "location": "Locația 1"
+    },
+    {
+      "id": 2,
+      "date": "2024-12-18",
+      "title": "Eveniment 2",
+      "description": "Descriere eveniment 2",
+      "location": "Locația 2"
+    }
+  ]
+  

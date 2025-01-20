@@ -115,3 +115,11 @@
     background: #ff1a1a;
     transform: rotate(90deg); /* Mic efect de rotație */
 }
+
+.error {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+

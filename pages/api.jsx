@@ -77,3 +77,17 @@ export async function loginUser(username, password) {
         
     }
 }
+
+export async function registerUser(userData) {
+    try {
+        const response = await axios.post('/auth/register', userData, {
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Eroare la înregistrare:", error);
+        throw error;
+    }
+}

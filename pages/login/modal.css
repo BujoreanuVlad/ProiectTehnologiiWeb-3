@@ -1,5 +1,5 @@
 /* Fundalul pentru modal */
-.modal-overlay {
+.unique-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -13,7 +13,7 @@
 }
 
 /* Containerul modalului */
-.modal {
+.unique-modal {
     width: 90%; /* Ajustează pentru ecrane mai mici */
     max-width: 420px; /* Lățime maximă pentru desktop */
     background: rgba(255, 255, 255, 0.2); /* Fundal semi-transparent */
@@ -28,34 +28,23 @@
     animation: fadeIn 0.3s ease-in-out; /* Adaugă o animație subtilă */
 }
 
-/* Animația de apariție */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: scale(0.9);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
 /* Titlul modalului */
-.modal h2 {
+.unique-modal h2 {
     font-size: 28px;
     margin-bottom: 20px;
     font-weight: bold;
+    color:white;
 }
 
 /* Inputuri din modal */
-.modal-form .input-box {
+.unique-modal-form .unique-input-box {
     position: relative;
     width: 100%;
     height: 50px;
     margin: 20px 0;
 }
 
-.modal-form input {
+.unique-modal-form input {
     width: 100%;
     height: 100%;
     background: transparent;
@@ -69,11 +58,11 @@
     box-sizing: border-box; /* Asigură calcularea corectă a dimensiunilor */
 }
 
-.modal-form input::placeholder {
+.unique-modal-form input::placeholder {
     color: rgba(255, 255, 255, 0.7); /* Placeholder mai subtil */
 }
 
-.modal-form .icon {
+.unique-modal-form .icon {
     position: absolute;
     right: 15px;
     top: 50%;
@@ -83,7 +72,7 @@
 }
 
 /* Butonul de înregistrare */
-.modal-form button {
+.unique-modal-form button {
     width: 100%;
     height: 45px;
     background: #fff;
@@ -98,13 +87,13 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.modal-form button:hover {
+.unique-modal-form button:hover {
     background: #ddd;
     transform: scale(1.05); /* Mică animație pe hover */
 }
 
 /* Butonul de închidere */
-.close-btn {
+.unique-close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -122,7 +111,7 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.close-btn:hover {
+.unique-close-btn:hover {
     background: #ff1a1a;
     transform: rotate(90deg); /* Mic efect de rotație */
 }

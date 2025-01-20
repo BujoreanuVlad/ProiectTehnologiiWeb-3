@@ -99,22 +99,22 @@ export default function Login() {
                 </form>
             </div>
             {isModalOpen && (
-                <div className='modal-overlay'>
-                    <div className='modal'>
-                        <button className='close-btn' onClick={closeModal}>
+                <div className='unique-modal-overlay'>
+                    <div className='unique-modal'>
+                        <button className='unique-close-btn' onClick={closeModal}>
                             &times;
                         </button>
                         <h2>Register</h2>
-                        <form className='modal-form'>
-                            <div className='input-box'>
+                        <form className='unique-modal-form'>
+                            <div className='unique-input-box'>
                                 <input type='text' placeholder='Username' required />
                                 <FaUser className='icon' />
                             </div>
-                            <div className='input-box'>
+                            <div className='unique-input-box'>
                                 <input type='email' placeholder='Email' required />
                                 <FaUser className='icon' />
                             </div>
-                            <div className='input-box'>
+                            <div className='unique-input-box'>
                                 <input type='password' placeholder='Password' required />
                                 <FaLock className='icon' />
                             </div>

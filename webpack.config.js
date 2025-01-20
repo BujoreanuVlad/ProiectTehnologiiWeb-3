@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+
 module.exports = {
     entry: "./pages/main.jsx", // Entry point of your application
     output: {
@@ -15,10 +16,16 @@ module.exports = {
                     loader: 'babel-loader', // Use Babel for .js and .jsx files
                 },
             },
-			{
-				test: /\.css$/i,
-				use: ["style-loader", "css-loader"]
-			}
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"], // Handling CSS files
+            },
+            {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                use: {
+                    loader: 'url-loader?limit=100000'
+                }
+            }
         ],
     },
     plugins: [

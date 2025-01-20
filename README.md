@@ -1,3 +1,20 @@
+# Installation
+
+## Step 1:
+Install MySQL Community Edition and set up account 'root' with no password/empty password
+
+## Step 2: 
+Clone repository
+
+## Step 3:
+Navigate into the cloned folder and run `npm install`
+
+## Step 4:
+Run `npm start`
+
+## Step 5:
+Open server in browser at http://localhost:3000
+
 # Pagini
 - log in
 ## Administrator:

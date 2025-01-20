@@ -1,9 +1,12 @@
 //import { checkIfEqual, checkIsInList } from "./utils.js";
-const { checkIfEqual, checkIsInList } = await import("./utils.js");
-const { Participant } = await import("./participant.js");
+//const { checkIfEqual, checkIsInList , genCodAcces} = await import("./utils.js");
+//const { Participant } = await import("./participant.js");
+const { checkIfEqual, checkIsInList , genCodAcces} = require("./utils.js");
+const Participant = require("./participant.js")
 
-export class Eveniment {
+class Eveniment {
 
+	#id;
 	#nume;
 	#dataDeschidere;
 	#interval;
@@ -12,7 +15,7 @@ export class Eveniment {
 	#stare;
 	#listaParticipanti;
 
-	constructor(nume, dataDeschidere, interval, nrLocuriDisponibile, codAcces=null, stare="CLOSED", listaParticipanti=[]) {
+	constructor(nume, dataDeschidere, interval, nrLocuriDisponibile, codAcces=null, stare="CLOSED", listaParticipanti=[], id=null) {
 		
 		this.#checkValidNume(nume);
 		this.#nume = nume;
@@ -26,8 +29,8 @@ export class Eveniment {
 		this.#checkValidNrLocuri(nrLocuriDisponibile);
 		this.#nrLocuriDisponibile = nrLocuriDisponibile;
 		
-		if (codAcces === null) {
-			this.#codAcces = this.#genCodAcces();
+		if (codAcces == null) {
+			this.#codAcces = genCodAcces();
 		}
 		else {
 			this.#checkValidCodAcces(codAcces);
@@ -39,20 +42,12 @@ export class Eveniment {
 
 		this.#checkValidListaParticipanti(listaParticipanti);
 		this.#listaParticipanti = listaParticipanti;
+
+		this.#id = id;
 	}
 
-	#genCodAcces(length=6) {
-
-		let codAcces = '';
-
-		const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-		const charactersLength = characters.length;
-
-		for (let i = 0; i < length; i++) {
-		  codAcces += characters.charAt(Math.floor(Math.random() * charactersLength));
-		}
-
-		return codAcces;
+	getId() {
+		return this.#id;
 	}
 
 	getNume() {
@@ -98,7 +93,7 @@ export class Eveniment {
 			this.#codAcces = cod;
 		}
 		else if (typeof(cod) === 'number' || cod instanceof Number) {
-			this.#codAcces = this.#genCodAcces(cod);
+			this.#codAcces = genCodAcces(cod);
 		}
 	}
 
@@ -225,7 +220,7 @@ export class Eveniment {
 	}
 
 	toString() {
-		return JSON.stringify({"nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere, "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti.map((obj) => {obj['participant'] = obj['participant'].toString(); return obj}), "nrLocuriDisponibile": this.#nrLocuriDisponibile});
+		return JSON.stringify({"id": this.#id, "nume": this.#nume, "stare": this.#stare, "dataDeschidere": this.#dataDeschidere.toString(), "interval": this.#interval, "codAcces": this.#codAcces, "listaParticipanti": this.#listaParticipanti.map((obj) => {obj['participant'] = obj['participant'].toString(); return obj}), "nrLocuriDisponibile": this.#nrLocuriDisponibile});
 	}
 
 	static equals(ev1, ev2) {
@@ -273,6 +268,29 @@ export class Eveniment {
 	equals(otherEvent) {
 		return Eveniment.equals(this, otherEvent);
 	}
+
+	static fromJSON(obj) {
+		
+		let codAcces = null
+		let stare = "CLOSED"
+		let listaParticipanti = []
+		let id = null
+
+		if (Object.keys(obj).indexOf("codAcces") >= 0) {
+			codAcces = obj.codAcces;
+		}
+		if (Object.keys(obj).indexOf("stare") >= 0) {
+			stare = obj.stare;
+		}
+		if (Object.keys(obj).indexOf("listaParticipanti") >= 0) {
+			listaParticipanti = obj.listaParticipanti;
+		}
+		if (Object.keys(obj).indexOf("id") >= 0) {
+			id = obj.id;
+		}
+
+		return new Eveniment(obj.nume, obj.dataDeschidere, obj.interval, obj.nrLocuriDisponibile, codAcces, stare, listaParticipanti, id);
+	}
 }
 
-//module.exports = Eveniment;
+module.exports = Eveniment;

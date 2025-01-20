@@ -1,19 +1,28 @@
-const { Eveniment } = await import("./eveniment.js");
+//const { Eveniment } = await import("./eveniment.js");
+const Eveniment = require("./eveniment.js");
 //import { checkIfEqual, checkIsInList } from "./utils.js";
-const { checkIfEqual, checkIsInList } = await import("./utils.js");
+//const { checkIfEqual, checkIsInList } = await import("./utils.js");
+const { checkIfEqual, checkIsInList } = require("./utils.js");
 
-export class GrupEvenimente {
+class GrupEvenimente {
 
+	#id;
 	#nume;
 	#listaEvenimente;
 
-	constructor(nume, listaEvenimente=[]) {
+	constructor(nume, listaEvenimente=[], id=null) {
 		
 		this.#checkValidNume(nume);
 		this.#nume = nume;
 
 		this.#checkValidListaEvenimente(listaEvenimente);
 		this.#listaEvenimente = listaEvenimente;
+
+		this.#id = id;
+	}
+
+	getId() {
+		return this.#id;
 	}
 
 	getNume() {
@@ -83,7 +92,8 @@ export class GrupEvenimente {
 	#checkValidNume(nume) {
 
 		if (!(typeof(nume) === 'string' || nume instanceof String)) {
-			throw new Error("Eroare. Numele trebuie sa fie de tip string.");
+			console.log("numele ba" + nume)
+			throw new Error("Eroare. Numele trebuie sa fie de tip string." + nume);
 		}
 	}
 
@@ -109,8 +119,24 @@ export class GrupEvenimente {
 	}
 
 	toString() {
-		return JSON.stringify({"nume": this.#nume, "listaEvenimente": this.#listaEvenimente.toString()})
+		return JSON.stringify({"id": this.#id, "nume": this.#nume, "listaEvenimente": this.#listaEvenimente.toString()})
 	}
+
+	static fromJSON(obj) {
+
+		let listaEvenimente = []
+		let id = null
+
+		if (Object.keys(obj).indexOf("listaEvenimente") >= 0) {
+			listaEvenimente = obj.listaEvenimente
+		}
+		if (Object.keys(obj).indexOf("id") >= 0) {
+			id = obj.id
+		}
+
+		return new GrupEvenimente(obj.nume, listaEvenimente, id)
+	}
+
 }
 
-//module.exports = GrupEvenimente;
+module.exports = GrupEvenimente;

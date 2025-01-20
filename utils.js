@@ -1,4 +1,4 @@
-export function checkIfEqual(obj1, obj2) {
+function checkIfEqual(obj1, obj2) {
 	
 	if (typeof(obj1) === 'object' || typeof(obj2) === 'object') {
 		if (obj1 == obj2) {
@@ -47,7 +47,7 @@ export function checkIfEqual(obj1, obj2) {
 }
 
 //Function to check whether or not an object is present in an array or in the properties of the objects of an array
-export function checkIsInList(list, obj) {
+function checkIsInList(list, obj) {
 	
 	for (let i = 0; i < list.length; i++) {
 
@@ -68,3 +68,19 @@ export function checkIsInList(list, obj) {
 
 	return -1;
 }
+
+function genCodAcces(length=6) {
+
+	let codAcces = '';
+
+	const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+	const charactersLength = characters.length;
+
+	for (let i = 0; i < length; i++) {
+	  codAcces += characters.charAt(Math.floor(Math.random() * charactersLength));
+	}
+
+	return codAcces;
+}
+
+module.exports = { checkIfEqual, checkIsInList, genCodAcces }

@@ -1,6 +1,7 @@
 const ParticipantORM = require('../models/participant.js')
 const Eveniment = require('../eveniment.js')
 const EvenimentORM = require('../models/eveniment.js')
+const InscriereEvenimentORM = require('../models/inscriereEveniment.js')
 const { Sequelize, Op } = require("sequelize")
 
 inscriereEvenimentDao = {
@@ -18,9 +19,16 @@ inscriereEvenimentDao = {
 			let eveniment = Eveniment.fromJSON(req.body)
 
 			participant = await ParticipantORM.findByPk(req.params.username)
-			await participant.addEvent(eveniment.getId())
 
-			res.status(200).send()
+
+			if (participant) {
+				await participant.addEvent(eveniment.getId(), {through: {dataInregistrare: new Date()}})
+
+				res.status(200).send()
+			}
+			else {
+				res.status(404).send("Eroare. Nu am gasit participantul")
+			}
 		}
 		catch(error) {
 			res.status(423).send(error.message)
@@ -32,9 +40,46 @@ inscriereEvenimentDao = {
 		try {
 			
 			participant = await ParticipantORM.findByPk(req.params.username)
-			await participant.addEvent(req.params.evenimentId)
 
-			res.status(200).send()
+			if (participant) {
+				await participant.addEvent(req.params.evenimentId, {through: {dataInregistrare: new Date()}})
+
+				res.status(200).send()
+			}
+			else {
+				res.status(404).send("Eroare. Nu am gasit participantul")
+			}
+		}
+		catch(error) {
+			res.status(423).send(error.message)
+		}
+	},
+
+	confirmaPrezenta: async (req, res) => {
+		
+		try {
+			
+			eveniment = await EvenimentORM.findByPk(req.params.evenimentId)
+			
+			if (eveniment.codAcces === req.params.codAcces) {
+
+				inscriere = await InscriereEvenimentORM.findOne({where: {eventId: eveniment.id, participantUsername: req.params.username}})
+				
+				if (inscriere === null) {
+					
+					eveniment.addParticipant(req.params.username, {through: { dataInregistrare: new Date(), dataPrezenta: new Date() }})
+				}
+				else {
+				
+					inscriere.dataPrezenta = new Date()
+					await inscriere.save()
+				}
+
+				res.status(200).send()
+			}
+			else {
+				res.status(401).send("Eroare. Cod acces invalid")
+			}
 		}
 		catch(error) {
 			res.status(423).send(error.message)

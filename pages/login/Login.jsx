@@ -10,8 +10,10 @@ import CryptoJS from 'crypto-js';
 import { loginUser, registerUser } from '../api.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from 'react-router-dom';
 
 export default function Login() {
+    const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -107,17 +109,19 @@ export default function Login() {
                 let token = CryptoJS.AES.decrypt(result.token, "cheie magica").toString(CryptoJS.enc.Utf8);
                 if (token.length < ";SECURITY_T0KEN".length || token.substring(token.length - ";SECURITY_T0KEN".length) !== ";SECURITY_T0KEN") {
                     setErrorMessage("Autentificare eșuată. Verifică username-ul și parola.");
-                    toast.error("Autentificare eșuată. Verifică username-ul și parola."); // Notificare eroare
+                    toast.error("Autentificare eșuată. Verifică username-ul și parola."); 
                 } else {
                     console.log("Log in successful");
                     let user = token.substring(0, token.length - ";SECURITY_T0KEN".length);
                     console.log(user);
                     if (user === "admin") {
                         console.log("Rutare admin");
-                        toast.success("Autentificare reușită! Bun venit, Admin."); // Notificare succes
+                        toast.success("Autentificare reușită! Bun venit, Admin."); 
+                        navigate("/admin");
                     } else {
                         console.log("Rutare user");
-                        toast.success("Autentificare reușită! Bun venit!"); // Notificare succes
+                        toast.success("Autentificare reușită! Bun venit!"); 
+                        navigate("/user");
                     }
                 }
             } else {

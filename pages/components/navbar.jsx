@@ -9,14 +9,14 @@ const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showEventsModal, setShowEventsModal] = useState(false); 
   const [evenimente, setEvenimente] = useState([]); 
-  const username = "Jane Doe";
+  const username = "mnastase";
 
   const cookies = new Cookies()
   const token = cookies.get("authToken")
 
   useEffect(() => {
 
-	getEventsByParticipantId(token)
+	getEventsByParticipantId(username, token)
 	.then((response) => {
 		if (response.status === 200) {
 			setEvenimente(response.data)

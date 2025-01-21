@@ -1,93 +1,99 @@
 /* Fundalul pentru modal */
-.modal-overlay {
+.unique-modal-overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.6);
+    background: rgba(0, 0, 0, 0.6); /* Fundal semi-transparent */
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000;
+    z-index: 1000; /* Asigură suprapunerea peste alte elemente */
 }
 
 /* Containerul modalului */
-.modal {
-    width: 420px;
-    background: rgba(255, 255, 255, 0.2); /* Fundal transparent */
+.unique-modal {
+    width: 90%; /* Ajustează pentru ecrane mai mici */
+    max-width: 420px; /* Lățime maximă pentru desktop */
+    background: rgba(255, 255, 255, 0.2); /* Fundal semi-transparent */
     border-radius: 10px;
     border: 2px solid rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(30px);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    padding: 30px 40px;
+    backdrop-filter: blur(30px); /* Creează efect de estompare */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Umbră mai pronunțată */
+    padding: 30px 20px;
     color: #fff;
     text-align: center;
     position: relative;
+    animation: fadeIn 0.3s ease-in-out; /* Adaugă o animație subtilă */
 }
 
 /* Titlul modalului */
-.modal h2 {
-    font-size: 36px;
+.unique-modal h2 {
+    font-size: 28px;
     margin-bottom: 20px;
     font-weight: bold;
+    color:white;
 }
 
 /* Inputuri din modal */
-.modal-form .input-box {
+.unique-modal-form .unique-input-box {
     position: relative;
     width: 100%;
     height: 50px;
-    margin: 30px 0;
+    margin: 20px 0;
 }
 
-.modal-form input {
+.unique-modal-form input {
     width: 100%;
     height: 100%;
     background: transparent;
     border: none;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     outline: none;
     border-radius: 40px;
     font-size: 16px;
     color: #fff;
-    padding: 20px 45px 20px 20px;
+    padding: 0 45px 0 15px;
+    box-sizing: border-box; /* Asigură calcularea corectă a dimensiunilor */
 }
 
-.modal-form input::placeholder {
-    color: #fff;
+.unique-modal-form input::placeholder {
+    color: rgba(255, 255, 255, 0.7); /* Placeholder mai subtil */
 }
 
-.modal-form .icon {
+.unique-modal-form .icon {
     position: absolute;
-    right: 20px;
+    right: 15px;
     top: 50%;
     transform: translateY(-50%);
-    font-size: 16px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 /* Butonul de înregistrare */
-.modal-form button {
+.unique-modal-form button {
     width: 100%;
     height: 45px;
     background: #fff;
     border: none;
     outline: none;
     border-radius: 40px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     font-size: 16px;
     color: #333;
-    font-weight: 700;
-    transition: background-color 0.3s;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.modal-form button:hover {
+.unique-modal-form button:hover {
     background: #ddd;
+    transform: scale(1.05); /* Mică animație pe hover */
 }
 
 /* Butonul de închidere */
-.close-btn {
+.unique-close-btn {
     position: absolute;
     top: 15px;
     right: 15px;
@@ -105,7 +111,15 @@
     transition: background-color 0.3s, transform 0.2s;
 }
 
-.close-btn:hover {
+.unique-close-btn:hover {
     background: #ff1a1a;
-    transform: rotate(90deg);
+    transform: rotate(90deg); /* Mic efect de rotație */
 }
+
+.error {
+    color: #ff4d4d;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+

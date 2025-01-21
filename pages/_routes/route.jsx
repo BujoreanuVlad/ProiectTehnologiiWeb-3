@@ -7,7 +7,7 @@ const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Events />} />
+        <Route path="/" element={<Login />} />
         <Route path="events">
           <Route path=":eventId" element={<EventDetails />} />{" "}
         </Route>

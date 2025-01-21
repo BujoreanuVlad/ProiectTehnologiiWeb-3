@@ -28,8 +28,6 @@ export default function Login() {
 
     const cookies = new Cookies();
 
-    cookies.set("hello", "world");
-
     const validateForm = () => {
         const errObj = {};
 

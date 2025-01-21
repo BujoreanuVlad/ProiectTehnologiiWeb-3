@@ -11,8 +11,7 @@ const EventDetails = () => {
   const { eventId } = useParams();
 
   const cookies = new Cookies()
-  const token = cookies.get("token")
-
+  const token = cookies.get("authToken")
   const getEveniment = () => {
     getEvenimentId(eventId, token)
       .then((response) => {
@@ -72,9 +71,6 @@ const EventDetails = () => {
 
           <div className="event-details-body">
             <p>{event.descriereEveniment}</p>
-          </div>
-          <div className="edit-button-container">
-            <button className="edit-button">Modifică Detaliile</button>
           </div>
         </div>
         <Participants />

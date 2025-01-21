@@ -1,28 +1,35 @@
 import React, { useState } from 'react';  
 import { FaUserCircle } from "react-icons/fa";
 import AddEventGroup from './AddEventGroup.jsx';  
-import AddEvent from './AddEvent.jsx';  // Asigură-te că ai importat componenta AddEvent
+import AddEvent from './AddEvent.jsx';  
 import "./navbarAdmin.css";
+import { useNavigate } from 'react-router-dom'; 
+import Cookies from 'universal-cookie';
+
 
 const NavbarAdmin = () => {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showGroupModal, setShowGroupModal] = useState(false);
-  const [showEventModal, setShowEventModal] = useState(false); // Starea pentru modalul de eveniment
+  const [showEventModal, setShowEventModal] = useState(false); 
   
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
 
-  const handleLogout = () => {
-    console.log("Delogare...");
-  };
-
   const handleCloseGroupModal = () => {
-    setShowGroupModal(false);  // Închide modalul pentru grupuri
+    setShowGroupModal(false); 
   };
 
   const handleCloseEventModal = () => {
-    setShowEventModal(false);  // Închide modalul pentru evenimente
+    setShowEventModal(false); 
+  };
+
+  const handleLogout = () => {
+    console.log("Delogare...");
+    cookies.remove("authToken");
+    navigate('/'); 
   };
 
   return (
@@ -34,7 +41,7 @@ const NavbarAdmin = () => {
       <div className="navbar-right">
         <div className="user-info">
           <button onClick={() => setShowGroupModal(true)}>Adaugă grup evenimente</button>
-          <button onClick={() => setShowEventModal(true)}>Adaugă eveniment</button> {/* Buton pentru adăugarea evenimentelor */}
+          <button onClick={() => setShowEventModal(true)}>Adaugă eveniment</button> 
           <span>Admin</span>
           <button className="user-icon" onClick={toggleDropdown}>
             <FaUserCircle size={30}/>
@@ -42,7 +49,7 @@ const NavbarAdmin = () => {
           {isDropdownOpen && (
               <div className="dropdown-menu">
                 <ul>
-                  <li onClick={handleLogout}>Delogare</li>
+                <li onClick={handleLogout}>Delogare</li>
                 </ul>
               </div>
           )}

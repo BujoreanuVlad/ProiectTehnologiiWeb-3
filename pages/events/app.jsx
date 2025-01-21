@@ -1,44 +1,57 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./app.css";
 import EventGroup from "./EventGroup.jsx";
-import { NavLink } from "react-router-dom";
-import {useState, useEffect} from "react";
-import {getGrupEvenimenteAll} from "../api.jsx";
 import NavbarAdmin from "../../components/navbarAdmin.jsx";
-import Cookies from 'universal-cookie';
+import Cookies from "universal-cookie";
+import { getGrupEvenimenteAll } from "../api.jsx";
 
 const Events = () => {
   const [grupuriEvenimente, setGrupuriEvenimente] = useState([]);
+  const cookies = new Cookies();
+  const token = cookies.get("authToken");
 
-  const cookies = new Cookies()
-  const token = cookies.get("token")
+  const getGrupuriEvenimente = useCallback(() => {
+    if (!token) {
+      console.log("Token lipsă. Redirecționează la pagina de login.");
+      return;
+    }
 
-  const getGrupuriEvenimente = () => {
     getGrupEvenimenteAll(token)
-    .then((response) => {
-      if(response.status == 200) {
-        setGrupuriEvenimente(response.data);
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    })
-  }
+      .then((response) => {
+        if (response.status === 200) {
+          // Actualizează doar dacă datele sunt diferite
+          setGrupuriEvenimente((prevData) =>
+            JSON.stringify(prevData) !== JSON.stringify(response.data)
+              ? response.data
+              : prevData
+          );
+        } else {
+          console.error("Eroare la încărcarea grupurilor de evenimente:", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Eroare API:", error);
+      });
+  }, [token]);
 
-useEffect(() => {
-  getGrupuriEvenimente();
-}, []);
+  useEffect(() => {
+    getGrupuriEvenimente(); 
+    const intervalId = setInterval(getGrupuriEvenimente, 1000); 
+
+    return () => clearInterval(intervalId); 
+  }, [getGrupuriEvenimente]);
 
   return (
     <div className="container">
-    
-    <NavbarAdmin></NavbarAdmin>
-
-      {/* Page Content - Events */}
+      <NavbarAdmin />
       <div className="grupEvenimente">
-        {grupuriEvenimente.map((group, index) => (
-          <EventGroup key={index} eventGroup={group} />
-        ))}
+        {grupuriEvenimente.length === 0 ? (
+          <p>Se încarcă grupurile de evenimente...</p>
+        ) : (
+          grupuriEvenimente.map((group, index) => (
+            <EventGroup key={index} eventGroup={group} />
+          ))
+        )}
       </div>
     </div>
   );

@@ -29,6 +29,18 @@ evenimentDao = {
 		try {
 
 			let eveniment = await EvenimentORM.findByPk(req.params.id);
+
+			let currentTime = new Date()
+
+			if (currentTime >= eveniment.dataDeschidere && currentTime <= new Date(eveniment.dataDeschidere.getTime() + eveniment.interval)) {
+				eveniment.stare = "OPEN"
+			}
+			else {
+				eveniment.stare = "CLOSED"
+			}
+
+			await eveniment.save()
+
 			res.status(200).json(eveniment);
 		}
 		catch (error) {
@@ -46,7 +58,29 @@ evenimentDao = {
 					}
 				})
 
-			res.status(200).json(evenimente)
+			if (evenimente) {
+
+				let currentTime = new Date()
+
+				for (let i = 0; i < evenimente; i++) {
+
+
+					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval)) {
+						evenimente[i].stare = "OPEN"
+					}
+					else {
+						evenimente[i].stare = "CLOSED"
+					}
+
+					await evenimente[i].save()
+				}
+
+				res.status(200).json(evenimente)
+			}
+			else {
+				res.status(404).send()
+			}
+
 		}
 		catch(error) {
 			res.status(500).send(error.message)
@@ -72,7 +106,29 @@ evenimentDao = {
 
 		try {
 			const evenimente = await EvenimentORM.findAll();
-			res.status(200).json(evenimente);
+
+			if (evenimente) {
+
+				let currentTime = new Date()
+
+				for (let i = 0; i < evenimente; i++) {
+
+
+					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval)) {
+						evenimente[i].stare = "OPEN"
+					}
+					else {
+						evenimente[i].stare = "CLOSED"
+					}
+
+					await evenimente[i].save()
+				}
+
+				res.status(200).json(evenimente)
+			}
+			else {
+				res.status(404).send()
+			}
 		}
 		catch(err) {
 			res.status(500).send(err.message);

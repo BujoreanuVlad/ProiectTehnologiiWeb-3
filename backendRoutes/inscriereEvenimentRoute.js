@@ -5,9 +5,9 @@ const inscriereEvenimentRouter = express.Router()
 
 inscriereEvenimentRouter.use((req, res, next) => {
 
-	if (req.body["token"]) {
+	if (req.headers["authorization"]) {
 
-		let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+		let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 		if (token.length > ";SECURITY_T0KEN".length) {
 			
@@ -32,7 +32,7 @@ inscriereEvenimentRouter.use((req, res, next) => {
 inscriereEvenimentRouter.get("/user/:username",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -56,7 +56,7 @@ inscriereEvenimentDao.getEvents)
 inscriereEvenimentRouter.get("/event/:evenimentId", 
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -80,7 +80,7 @@ inscriereEvenimentDao.getParticipanti)
 inscriereEvenimentRouter.post("/user/:username", 
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -104,7 +104,7 @@ inscriereEvenimentDao.inscrieUsername)
 inscriereEvenimentRouter.post("/user/:username/event/:evenimentId",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -128,7 +128,7 @@ inscriereEvenimentDao.inscrieUsernameByEvenimentId)
 inscriereEvenimentRouter.post("/user/:username/event/:evenimentId/codAcces/:codAcces", 
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -152,7 +152,7 @@ inscriereEvenimentDao.confirmaPrezenta)
 inscriereEvenimentRouter.delete("/user/:username",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -176,7 +176,7 @@ inscriereEvenimentDao.stergeUsername)
 inscriereEvenimentRouter.delete("/user/:username/event/:evenimentId",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -200,7 +200,7 @@ inscriereEvenimentDao.stergeUsernameByEvenimentId)
 inscriereEvenimentRouter.delete("/user/:username",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -224,7 +224,7 @@ inscriereEvenimentDao.stergeToateEvenimenteleByUsername)
 inscriereEvenimentRouter.delete("/event/:evenimentId",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 

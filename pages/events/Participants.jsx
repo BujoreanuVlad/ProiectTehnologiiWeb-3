@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { getParticipantsByEvenimentId } from "../api.jsx";
 import { useParams } from "react-router-dom";
 import "./participants.css";
+import Cookies from 'universal-cookie';
 
 const Participants = () => {
   const [participants, setParticipants] = useState([]);
   const { eventId } = useParams(); 
 
+  const cookies = new Cookies()
+  const token = cookies.get("token")
+
   const getParticipants = () => {
-    getParticipantsByEvenimentId(eventId)
+    getParticipantsByEvenimentId(eventId, token)
       .then((response) => {
         if (response.status === 200) {
           console.log("Aici sunt participanții : ", response.data);

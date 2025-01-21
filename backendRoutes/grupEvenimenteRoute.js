@@ -5,9 +5,9 @@ const grupEvenimenteRouter = express.Router()
 
 grupEvenimenteRouter.use((req, res, next) => {
 
-	if (req.body["token"]) {
+	if (req.headers["authorization"]) {
 
-		let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+		let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 		if (token.length > ";SECURITY_T0KEN".length) {
 			
@@ -29,7 +29,23 @@ grupEvenimenteRouter.use((req, res, next) => {
 
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+		next();
+	}
+}
+)
+
+grupEvenimenteRouter.post("/create",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -47,16 +63,102 @@ grupEvenimenteRouter.use((req, res, next) => {
 			res.status(401).send("Error. Invalid user.")
 		}
 	}
-}
-)
-
-grupEvenimenteRouter.post("/create", grupEvenimenteDao.createGrupEvenimente)
+},
+grupEvenimenteDao.createGrupEvenimente)
 grupEvenimenteRouter.get("/getAll", grupEvenimenteDao.getGrupEvenimenteAll)
 grupEvenimenteRouter.get("/get/:id", grupEvenimenteDao.getGrupEvenimenteById)
 grupEvenimenteRouter.get("/getEvents/:id", grupEvenimenteDao.getEvenimenteById)
-grupEvenimenteRouter.put("/update", grupEvenimenteDao.updateGrupEvenimente)
-grupEvenimenteRouter.delete("/delete/:id", grupEvenimenteDao.deleteGrupEvenimenteById)
-grupEvenimenteRouter.delete("/deleteAll", grupEvenimenteDao.deleteGrupEvenimenteAll)
-grupEvenimenteRouter.delete("/delete", grupEvenimenteDao.deleteGrupEvenimente)
+grupEvenimenteRouter.put("/update",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+grupEvenimenteDao.updateGrupEvenimente)
+grupEvenimenteRouter.delete("/delete/:id",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+grupEvenimenteDao.deleteGrupEvenimenteById)
+grupEvenimenteRouter.delete("/deleteAll",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+grupEvenimenteDao.deleteGrupEvenimenteAll)
+grupEvenimenteRouter.delete("/delete",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+grupEvenimenteDao.deleteGrupEvenimente)
 
 module.exports = grupEvenimenteRouter;

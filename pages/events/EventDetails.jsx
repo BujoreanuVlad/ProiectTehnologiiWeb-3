@@ -4,13 +4,17 @@ import NavbarAdmin from "../../components/navbarAdmin.jsx";
 import { getEvenimentId } from "../api.jsx";
 import { useParams } from "react-router-dom";
 import Participants from "./Participants.jsx";
+import Cookies from 'universal-cookie';
 
 const EventDetails = () => {
   const [event, setEvent] = useState({});
   const { eventId } = useParams();
 
+  const cookies = new Cookies()
+  const token = cookies.get("token")
+
   const getEveniment = () => {
-    getEvenimentId(eventId)
+    getEvenimentId(eventId, token)
       .then((response) => {
         if (response.status === 200) {
           console.log("Aici este : ", response.data);

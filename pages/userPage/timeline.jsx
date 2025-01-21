@@ -3,11 +3,15 @@ import './timeline.css';
 import ModalEveniment from './ModalEveniment.jsx'; 
 import "./ModalEveniment.css";
 import { getEvenimenteAll, getEvenimentId } from '../api.jsx';
+import Cookies from 'universal-cookie';
 
 const Timeline = () => {
   const [eventsData, setEventsData] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null); 
   const [showModal, setShowModal] = useState(false); 
+
+	const cookies = new Cookies()
+	const token = cookies.get("authToken")
 
   useEffect(() => {
     fetchAllEvents();
@@ -15,7 +19,7 @@ const Timeline = () => {
 
   const fetchAllEvents = async () => {
     try {
-      const events = await getEvenimenteAll(); 
+      const events = await getEvenimenteAll(token); 
       setEventsData(events);
     } catch (error) {
       console.error("Eroare la încărcarea evenimentelor:", error);
@@ -24,7 +28,7 @@ const Timeline = () => {
 
   const fetchEventDetails = async (id) => {
     try {
-      const eventDetails = await getEvenimentId(id); 
+      const eventDetails = await getEvenimentId(id, token); 
       setSelectedEvent(eventDetails.data); 
       setShowModal(true); 
     } catch (error) {

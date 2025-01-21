@@ -98,9 +98,11 @@ const Participants = () => {
     ) : (
       <p>Nu există participanți pentru acest eveniment.</p>
     )}
-    <button className="download-button" onClick={downloadCSV}>
+    {participants.length > 0 && (
+        <button className="download-button" onClick={downloadCSV}>
           Descarcă lista participanți
         </button>
+      )}
   </div>
   
   );

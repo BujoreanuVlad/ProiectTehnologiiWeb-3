@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { addEveniment, getGrupEvenimenteAll } from '../pages/api.jsx'; // Importă funcțiile API
+import { addEveniment, getGrupEvenimenteAll } from '../pages/api.jsx';
 import './AddEventGroupModal.css';
 import imageCompression from 'browser-image-compression';
 import Cookies from 'universal-cookie';
@@ -14,20 +14,20 @@ const AddEvent = ({ show, onClose }) => {
     const [availableSeats, setAvailableSeats] = useState('');
     const [eventDescription, setEventDescription] = useState('');
     const [image, setImage] = useState(null);
-    const [selectedGroup, setSelectedGroup] = useState(''); // Grup selectat
-    const [groups, setGroups] = useState([]); // Lista grupurilor
+    const [selectedGroup, setSelectedGroup] = useState(''); 
+    const [groups, setGroups] = useState([]); 
     const [errors, setErrors] = useState({});
-    const [loadingGroups, setLoadingGroups] = useState(false); // Loader pentru grupuri
+    const [loadingGroups, setLoadingGroups] = useState(false); 
 
-	const cookies = new Cookies()
-	const token = cookies.get("authToken")
+	const cookies = new Cookies();
+	const token = cookies.get("authToken");
 
     useEffect(() => {
         const fetchGroups = async () => {
             try {
                 setLoadingGroups(true);
                 const response = await getGrupEvenimenteAll(token);
-                setGroups(response.data); // Asumăm că răspunsul conține o listă de grupuri
+                setGroups(response.data); 
             } catch (error) {
                 console.error('Eroare la încărcarea grupurilor:', error);
                 toast.error('Nu s-au putut încărca grupurile. Te rugăm să reîncerci mai târziu.');
@@ -43,13 +43,13 @@ const AddEvent = ({ show, onClose }) => {
         const file = e.target.files[0];
         if (file) {
             const options = {
-                maxSizeMB: 1, // Dimensiunea maximă a fișierului (MB)
-                maxWidthOrHeight: 1024, // Dimensiunea maximă în pixeli
+                maxSizeMB: 1, 
+                maxWidthOrHeight: 1024, 
             };
             try {
                 const compressedFile = await imageCompression(file, options);
                 const base64String = await imageCompression.getDataUrlFromFile(compressedFile);
-                setImage(base64String); // Salvează stringul Base64 în state
+                setImage(base64String); 
             } catch (error) {
                 console.error('Eroare la compresia imaginii:', error);
             }
@@ -95,17 +95,16 @@ const AddEvent = ({ show, onClose }) => {
             dataDeschidere: eventDate,
             interval: parseInt(eventInterval, 10),
             nrLocuriDisponibile: parseInt(availableSeats, 10),
-            stare: 'CLOSED', // Valoarea implicită
+            stare: 'CLOSED',
             idGrup: selectedGroup,
             imagineEveniment: image || '',
             descriereEveniment: eventDescription,
         };
 
         try {
-            await addEveniment(eventData);
+            await addEveniment(eventData, token);
             toast.success('Evenimentul a fost adăugat cu succes!');
 
-            // Resetare câmpuri
             setEventName('');
             setEventDate('');
             setEventLocation('');

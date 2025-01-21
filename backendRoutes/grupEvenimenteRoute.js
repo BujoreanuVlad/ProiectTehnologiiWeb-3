@@ -1,4 +1,5 @@
 const express = require("express")
+const crypto = require("crypto-js")
 const grupEvenimenteDao = require("../controllers/grupEvenimenteDAO")
 
 const grupEvenimenteRouter = express.Router()

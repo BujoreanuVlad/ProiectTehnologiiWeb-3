@@ -5,9 +5,9 @@ const participantRouter = express.Router()
 
 participantRouter.use((req, res, next) => {
 
-	if (req.body["token"]) {
+	if (req.headers["authorization"]) {
 
-		let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+		let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 		if (token.length > ";SECURITY_T0KEN".length) {
 			
@@ -32,7 +32,7 @@ participantRouter.use((req, res, next) => {
 participantRouter.post("/create",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -56,7 +56,7 @@ participantDao.createParticipant)
 participantRouter.get("/getAll", 
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -80,7 +80,7 @@ participantDao.getParticipantAll)
 participantRouter.get("/getByUsername/:username",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -104,7 +104,7 @@ participantDao.getParticipantByUsername)
 participantRouter.get("/getDates/:username",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -128,7 +128,7 @@ participantDao.getDatesByUsername)
 participantRouter.put("/update",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -160,7 +160,7 @@ participantDao.updateParticipant)
 participantRouter.delete("/deleteByUsername/:username",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -184,7 +184,7 @@ participantDao.deleteParticipantByUsername)
 participantRouter.delete("/deleteAll",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -208,7 +208,7 @@ participantDao.deleteParticipantAll)
 participantRouter.delete("/delete",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 

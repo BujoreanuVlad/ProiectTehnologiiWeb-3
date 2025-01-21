@@ -1,43 +1,67 @@
 import axios from 'axios'
 axios.defaults.baseURL = 'http://localhost:3000/';
 
-export async function getGrupEvenimenteAll() {
+export async function getGrupEvenimenteAll(token) {
     return await axios.get(
         "grupEvenimente/getAll",
-        { "Content-Type": "application/json" }
+        {headers: {
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
     );
 }
 
-export async function getEvenimenteByGrupId(id) {
+export async function getEvenimenteByGrupId(id, token) {
     return await axios.get(
         "grupEvenimente/getEvents/" + id,
-        { "Content-Type": "application/json" }
+        {headers: {
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
     );
 }
 
-export async function getEvenimentId(id) {
+export async function getEvenimentId(id, token) {
     return await axios.get(
         "eveniment/getById/" + id,
-        { "Content-Type": "application/json" }
+        {headers: {
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
     );
 }
 
 
-export async function getParticipantsByEvenimentId(id) {
+export async function getParticipantsByEvenimentId(id, token) {
     return await axios.get(
         "inscrieri/event/" + id,
-        { "Content-Type": "application/json" }
+        {headers: {
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
     );
 }
 
-export async function addGrupEvenimente(groupName) {
+export async function getEventsByParticipantId(id, token) {
+    return await axios.get(
+        "inscrieri/user/" + id,
+        {headers:{
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
+    );
+}
+
+export async function addGrupEvenimente(groupName, token) {
     try {
         const response = await axios.post('grupEvenimente/create', {
             nume: groupName,
         }, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers:
+				{
+					"Content-Type": "application/json",
+					"Authorization": token
+				}
         });
         return response.data; 
     } catch (error) {
@@ -46,13 +70,14 @@ export async function addGrupEvenimente(groupName) {
     }
 }
 
-export async function addEveniment(eventData) {
+export async function addEveniment(eventData, token) {
     try {
-		console.log(eventData)
         const response = await axios.post('/eveniment/create', eventData, {
-            headers: {
-                'Content-Type': 'application/json',
-            },
+            headers:
+				{
+					"Content-Type": "application/json",
+					"Authorization": token
+				}
         });
         return response.data; 
     } catch (error) {
@@ -61,10 +86,14 @@ export async function addEveniment(eventData) {
     }
 }
 
-export async function getDistinctDates() {
+export async function getDistinctDates(token) {
     try {
         const response = await axios.get('/eveniment/getDates', {
-            headers: { "Content-Type": "application/json" }
+            headers:
+				{
+					"Content-Type": "application/json",
+					"Authorization": token
+				}
         });
         return response.data; 
     } catch (error) {
@@ -73,10 +102,14 @@ export async function getDistinctDates() {
     }
 }
 
-export async function getEvenimenteByDate(date) {
+export async function getEvenimenteByDate(date, token) {
     try {
         const response = await axios.get(`/eveniment/getByDate/${date}`, {
-            headers: { "Content-Type": "application/json" }
+            headers:
+				{
+					"Content-Type": "application/json",
+					"Authorization": token
+				}
         });
         return response.data; 
     } catch (error) {
@@ -85,10 +118,14 @@ export async function getEvenimenteByDate(date) {
     }
 }
 
-export async function getEvenimenteAll() {
+export async function getEvenimenteAll(token) {
     try {
         const response = await axios.get('/eveniment/getAll', {
-            headers: { "Content-Type": "application/json" }
+            headers:
+				{
+					"Content-Type": "application/json",
+					"Authorization": token
+				}
         });
         return response.data;
     } catch (error) {

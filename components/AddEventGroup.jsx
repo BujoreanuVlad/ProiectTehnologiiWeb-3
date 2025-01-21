@@ -2,16 +2,20 @@ import React, { useState } from 'react';
 import { toast } from 'react-toastify';
 import { addGrupEvenimente } from '../pages/api.jsx'; // Importă funcția
 import './AddEventGroupModal.css'; 
+import Cookies from 'universal-cookie';
 
 
 const AddEventGroup = ({ show, onClose, onAddGroup }) => {
     const [groupName, setGroupName] = useState('');
     const [errors, setErrors] = useState({});
 
+	const cookies = new Cookies()
+	const token = cookies.get("authToken")
+
     const validateForm = () => {
         const errObj = {};
 
-        if (!groupName.trim() || !groupName.match("^[a-zA-Z]+$")) {
+        if (!groupName.trim() || !groupName.match("^[a-zA-Z\s\d]+$")) {
             errObj.groupName = "Numele trebuie să conțina doar litere!";
           }
 
@@ -24,7 +28,7 @@ const AddEventGroup = ({ show, onClose, onAddGroup }) => {
         
         if(!validateForm()) {
         try {
-            const response = await addGrupEvenimente(groupName);
+            const response = await addGrupEvenimente(groupName, token);
     
             console.log("Grupul a fost adăugat cu succes:", response);
     

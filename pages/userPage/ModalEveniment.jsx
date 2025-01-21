@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./ModalEveniment.css";
 import { getEvenimentId } from "../api.jsx";
+import Cookies from 'universal-cookie';
 
 const ModalEveniment = ({ show, onClose, eveniment, onParticipa }) => {
   const [eventDetails, setEventDetails] = useState(null);
+
+	const cookies = new Cookies()
+	const token = cookies.get("authToken")
 
   useEffect(() => {
     if (eveniment) {
@@ -13,7 +17,7 @@ const ModalEveniment = ({ show, onClose, eveniment, onParticipa }) => {
 
   const fetchEventDetails = async (id) => {
     try {
-      const details = await getEvenimentId(id);
+      const details = await getEvenimentId(id, token);
       setEventDetails(details.data); // Setează detaliile evenimentului
     } catch (error) {
       console.error("Eroare la obținerea detaliilor evenimentului:", error);

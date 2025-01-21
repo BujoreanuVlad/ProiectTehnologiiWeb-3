@@ -6,9 +6,10 @@ const evenimentRouter = express.Router()
 
 evenimentRouter.use((req, res, next) => {
 
-	if (req.body["token"]) {
 
-		let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	if (req.headers["authorization"]) {
+
+		let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 		if (token.length > ";SECURITY_T0KEN".length) {
 			
@@ -26,11 +27,13 @@ evenimentRouter.use((req, res, next) => {
 	else {
 		res.status(401).send("Error. Please log in.")
 	}
-},
+}
+)
 
+evenimentRouter.post("/create",
 (req, res, next) => {
 
-	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
 
 	let fields = token.split(";")
 
@@ -48,18 +51,126 @@ evenimentRouter.use((req, res, next) => {
 			res.status(401).send("Error. Invalid user.")
 		}
 	}
-}
-)
-
-evenimentRouter.post("/create", evenimentDao.createEveniment)
+},
+evenimentDao.createEveniment)
 evenimentRouter.get("/getAll", evenimentDao.getEvenimentAll)
 evenimentRouter.get("/getById/:id", evenimentDao.getEvenimentById)
 evenimentRouter.get("/getByDate/:date", evenimentDao.getEvenimentByDate)
 evenimentRouter.get("/getDates", evenimentDao.getDates)
-evenimentRouter.put("/update", evenimentDao.updateEveniment)
-evenimentRouter.delete("/deleteById/:id", evenimentDao.deleteEvenimentById)
-evenimentRouter.delete("/deleteByDate/:date", evenimentDao.deleteEvenimentByDate)
-evenimentRouter.delete("/deleteAll", evenimentDao.deleteEvenimentAll)
-evenimentRouter.delete("/delete", evenimentDao.deleteEveniment)
+evenimentRouter.put("/update",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+evenimentDao.updateEveniment)
+evenimentRouter.delete("/deleteById/:id",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+evenimentDao.deleteEvenimentById)
+evenimentRouter.delete("/deleteByDate/:date",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+evenimentDao.deleteEvenimentByDate)
+evenimentRouter.delete("/deleteAll",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+evenimentDao.deleteEvenimentAll)
+evenimentRouter.delete("/delete",
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin") {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+evenimentDao.deleteEveniment)
 
 module.exports = evenimentRouter;

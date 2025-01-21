@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import { addEveniment, getGrupEvenimenteAll } from '../pages/api.jsx'; // Importă funcțiile API
 import './AddEventGroupModal.css';
 import imageCompression from 'browser-image-compression';
+import Cookies from 'universal-cookie';
 
 
 const AddEvent = ({ show, onClose }) => {
@@ -18,11 +19,14 @@ const AddEvent = ({ show, onClose }) => {
     const [errors, setErrors] = useState({});
     const [loadingGroups, setLoadingGroups] = useState(false); // Loader pentru grupuri
 
+	const cookies = new Cookies()
+	const token = cookies.get("authToken")
+
     useEffect(() => {
         const fetchGroups = async () => {
             try {
                 setLoadingGroups(true);
-                const response = await getGrupEvenimenteAll();
+                const response = await getGrupEvenimenteAll(token);
                 setGroups(response.data); // Asumăm că răspunsul conține o listă de grupuri
             } catch (error) {
                 console.error('Eroare la încărcarea grupurilor:', error);
@@ -56,7 +60,7 @@ const AddEvent = ({ show, onClose }) => {
     const validateForm = () => {
         const errObj = {};
 
-        if (!eventName.trim() || !/^[a-zA-Z\s]+$/.test(eventName)) {
+        if (!eventName.trim() || !/^[a-zA-Z\s\d]+$/.test(eventName)) {
             errObj.eventName = "Numele evenimentului trebuie să conțină doar litere și spații!";
         }
         if (!eventDate) {

@@ -5,12 +5,16 @@ import { NavLink } from "react-router-dom";
 import {useState, useEffect} from "react";
 import {getGrupEvenimenteAll} from "../api.jsx";
 import NavbarAdmin from "../../components/navbarAdmin.jsx";
+import Cookies from 'universal-cookie';
 
 const Events = () => {
   const [grupuriEvenimente, setGrupuriEvenimente] = useState([]);
 
+  const cookies = new Cookies()
+  const token = cookies.get("token")
+
   const getGrupuriEvenimente = () => {
-    getGrupEvenimenteAll()
+    getGrupEvenimenteAll(token)
     .then((response) => {
       if(response.status == 200) {
         setGrupuriEvenimente(response.data);

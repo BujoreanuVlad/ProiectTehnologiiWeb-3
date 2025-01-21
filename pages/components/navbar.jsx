@@ -1,18 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "./navbar.css";
 import UserEventsModal from "./userEventsModal.jsx"; 
+import Cookies from 'universal-cookie';
+import { getEventsByParticipantId } from "../api.jsx"
 
 const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showEventsModal, setShowEventsModal] = useState(false); 
+  const [evenimente, setEvenimente] = useState([]); 
   const username = "Jane Doe";
 
-  const evenimente = [
-    { id: 1, titlu: "Nuntă la mare", data: "2025-05-15" },
-    { id: 2, titlu: "Petrecere de aniversare", data: "2025-06-20" },
-    { id: 3, titlu: "Conferință Tech", data: "2025-07-10" },
-  ];
+  const cookies = new Cookies()
+  const token = cookies.get("authToken")
+
+  useEffect(() => {
+
+	getEventsByParticipantId(token)
+	.then((response) => {
+		if (response.status === 200) {
+			setEvenimente(response.data)
+		}
+	})
+	.catch((error) => {
+		console.error(error)
+	})
+  })
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);

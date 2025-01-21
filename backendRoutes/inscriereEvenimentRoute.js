@@ -125,7 +125,29 @@ inscriereEvenimentRouter.post("/user/:username/event/:evenimentId",
 },
 inscriereEvenimentDao.inscrieUsernameByEvenimentId)
 
-inscriereEvenimentRouter.post("/user/:username/event/:evenimentId/codAcces/:codAcces", inscriereEvenimentDao.confirmaPrezenta)
+inscriereEvenimentRouter.post("/user/:username/event/:evenimentId/codAcces/:codAcces", 
+(req, res, next) => {
+
+	let token = crypto.AES.decrypt(req.body["token"], "cheie magica").toString(crypto.enc.Utf8)
+
+	let fields = token.split(";")
+
+	if (fields.length !== 2) {
+		res.status(401).send("Error. Invalid user.")
+	}
+	else {
+
+		let user = fields[0]
+
+		if (user === "admin" || user === req.params.username) {
+			next();
+		}
+		else {
+			res.status(401).send("Error. Invalid user.")
+		}
+	}
+},
+inscriereEvenimentDao.confirmaPrezenta)
 
 inscriereEvenimentRouter.delete("/user/:username",
 (req, res, next) => {

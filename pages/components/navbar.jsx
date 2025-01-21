@@ -2,18 +2,14 @@ import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "./navbar.css";
 import UserEventsModal from "./userEventsModal.jsx"; 
-import Cookies from 'universal-cookie';
-import { getEventsByParticipantId } from "../api.jsx"
 
-const Navbar = () => {
+const Navbar = ({ username, evenimente }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showEventsModal, setShowEventsModal] = useState(false); 
-  const [evenimente, setEvenimente] = useState([]); 
-  const username = "mnastase";
+//  const [evenimente, setEvenimente] = useState([]); 
 
-  const cookies = new Cookies()
-  const token = cookies.get("authToken")
 
+/*
   useEffect(() => {
 
 	getEventsByParticipantId(username, token)
@@ -26,6 +22,7 @@ const Navbar = () => {
 		console.error(error)
 	})
   })
+*/
 
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);

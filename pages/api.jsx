@@ -52,6 +52,26 @@ export async function getEventsByParticipantId(id, token) {
     );
 }
 
+export async function inscrieParticipantLaEveniment(username, idEvent, token) {
+    return await axios.post(
+        "inscrieri/user/" + username + "/event/" + idEvent, {},
+        {headers:{
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
+    );
+}
+
+export async function confirmaPrezentaParticipantLaEveniment(username, idEvent, codAcces, token) {
+    return await axios.post(
+        "inscrieri/user/" + username + "/event/" + idEvent + "/codAcces/" + codAcces, {},
+        {headers:{
+			"Content-Type": "application/json",
+			"Authorization": token
+		}}
+    );
+}
+
 export async function addGrupEvenimente(groupName, token) {
     try {
         const response = await axios.post('grupEvenimente/create', {

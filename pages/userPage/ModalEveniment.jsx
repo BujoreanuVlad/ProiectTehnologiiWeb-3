@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./ModalEveniment.css";
-import { getEvenimentId } from "../api.jsx";
+import { getEvenimentId, inscrieParticipantLaEveniment } from "../api.jsx";
 import Cookies from 'universal-cookie';
 
-const ModalEveniment = ({ show, onClose, eveniment, onParticipa }) => {
+const ModalEveniment = ({ show, onClose, eveniment, username }) => {
   const [eventDetails, setEventDetails] = useState(null);
 
 	const cookies = new Cookies()
@@ -14,6 +14,10 @@ const ModalEveniment = ({ show, onClose, eveniment, onParticipa }) => {
       fetchEventDetails(eveniment.id);
     }
   }, [eveniment]);
+
+	const onParticipa = () => {
+		inscrieParticipantLaEveniment(username, eveniment.id, token)
+	}
 
   const fetchEventDetails = async (id) => {
     try {

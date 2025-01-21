@@ -48,6 +48,7 @@ export async function addGrupEvenimente(groupName) {
 
 export async function addEveniment(eventData) {
     try {
+		console.log(eventData)
         const response = await axios.post('/eveniment/create', eventData, {
             headers: {
                 'Content-Type': 'application/json',

@@ -125,6 +125,8 @@ inscriereEvenimentRouter.post("/user/:username/event/:evenimentId",
 },
 inscriereEvenimentDao.inscrieUsernameByEvenimentId)
 
+inscriereEvenimentRouter.post("/user/:username/event/:evenimentId/codAcces/:codAcces", inscriereEvenimentDao.confirmaPrezenta)
+
 inscriereEvenimentRouter.delete("/user/:username",
 (req, res, next) => {
 

@@ -15,6 +15,15 @@ body {
     height: 105vh; 
     padding: 20px; 
     box-sizing: border-box;
+    
+}
+
+body {
+    background: url('../../resource/8037194.png');
+    background-size: cover;
+    display: flex;
+    align-items: center;   
+    justify-content: center; 
 }
 
 .app-header {

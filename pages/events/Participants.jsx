@@ -90,13 +90,13 @@ const Participants = () => {
             ))}
           </tbody>
         </table>
+        <button className="download-button" onClick={downloadCSV}>
+          Descarcă lista participanți
+        </button>
       </div>
     ) : (
       <p>Nu există participanți pentru acest eveniment.</p>
     )}
-    <button className="download-button" onClick={downloadCSV}>
-          Descarcă lista participanți
-        </button>
   </div>
   
   );

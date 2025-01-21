@@ -69,9 +69,6 @@ const EventDetails = () => {
           <div className="event-details-body">
             <p>{event.descriereEveniment}</p>
           </div>
-          <div className="edit-button-container">
-            <button className="edit-button">Modifică Detaliile</button>
-          </div>
         </div>
         <Participants />
       </div>

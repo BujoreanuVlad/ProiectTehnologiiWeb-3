@@ -4,30 +4,30 @@ axios.defaults.baseURL = 'http://localhost:3000/';
 export async function getGrupEvenimenteAll(token) {
     return await axios.get(
         "grupEvenimente/getAll",
-        {
+        {headers: {
 			"Content-Type": "application/json",
 			"Authorization": token
-		}
+		}}
     );
 }
 
 export async function getEvenimenteByGrupId(id, token) {
     return await axios.get(
         "grupEvenimente/getEvents/" + id,
-        {
+        {headers: {
 			"Content-Type": "application/json",
 			"Authorization": token
-		}
+		}}
     );
 }
 
 export async function getEvenimentId(id, token) {
     return await axios.get(
         "eveniment/getById/" + id,
-        {
+        {headers: {
 			"Content-Type": "application/json",
 			"Authorization": token
-		}
+		}}
     );
 }
 
@@ -35,20 +35,20 @@ export async function getEvenimentId(id, token) {
 export async function getParticipantsByEvenimentId(id, token) {
     return await axios.get(
         "inscrieri/event/" + id,
-        {
+        {headers: {
 			"Content-Type": "application/json",
 			"Authorization": token
-		}
+		}}
     );
 }
 
 export async function getEventsByParticipantId(id, token) {
     return await axios.get(
         "inscrieri/user/" + id,
-        {
+        {headers:{
 			"Content-Type": "application/json",
 			"Authorization": token
-		}
+		}}
     );
 }
 
@@ -72,7 +72,6 @@ export async function addGrupEvenimente(groupName, token) {
 
 export async function addEveniment(eventData, token) {
     try {
-		console.log(eventData)
         const response = await axios.post('/eveniment/create', eventData, {
             headers:
 				{

@@ -6,6 +6,7 @@ const evenimentRouter = express.Router()
 
 evenimentRouter.use((req, res, next) => {
 
+
 	if (req.headers["authorization"]) {
 
 		let token = crypto.AES.decrypt(req.headers["authorization"], "cheie magica").toString(crypto.enc.Utf8)

@@ -4,6 +4,8 @@ import "./UserEventsModal.css";
 const UserEventsModal = ({ show, onClose, evenimente }) => {
   if (!show) return null; 
 
+  console.log(evenimente)
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">

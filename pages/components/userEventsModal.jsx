@@ -4,6 +4,8 @@ import "./UserEventsModal.css";
 const UserEventsModal = ({ show, onClose, evenimente }) => {
   if (!show) return null; 
 
+  console.log(evenimente)
+
   return (
     <div className="modal-overlay">
       <div className="modal-content">
@@ -17,7 +19,7 @@ const UserEventsModal = ({ show, onClose, evenimente }) => {
           {evenimente.length > 0 ? (
             evenimente.map((eveniment) => (
               <li key={eveniment.id}>
-                <strong>{eveniment.titlu}</strong> - {eveniment.data}
+                <strong>{eveniment.nume}</strong> - {eveniment.dataDeschidere}
               </li>
             ))
           ) : (

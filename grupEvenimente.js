@@ -92,7 +92,6 @@ class GrupEvenimente {
 	#checkValidNume(nume) {
 
 		if (!(typeof(nume) === 'string' || nume instanceof String)) {
-			console.log("numele ba" + nume)
 			throw new Error("Eroare. Numele trebuie sa fie de tip string." + nume);
 		}
 	}

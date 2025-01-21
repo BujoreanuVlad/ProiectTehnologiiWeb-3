@@ -91,7 +91,6 @@ const AddEvent = ({ show, onClose }) => {
             dataDeschidere: eventDate,
             interval: parseInt(eventInterval, 10),
             nrLocuriDisponibile: parseInt(availableSeats, 10),
-            codAcces: '', // Codul va fi generat pe server conform definiției
             stare: 'CLOSED', // Valoarea implicită
             idGrup: selectedGroup,
             imagineEveniment: image || '',

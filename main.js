@@ -21,12 +21,13 @@ const inscrieriRouter = require("./backendRoutes/inscriereEvenimentRoute.js")
 const EvenimentORM = require("./models/eveniment.js")
 const GrupEvenimenteORM = require("./models/grupEvenimente.js")
 const ParticipantORM = require("./models/participant.js")
+const InscriereEvenimentORM = require("./models/inscriereEveniment.js")
 
 GrupEvenimenteORM.hasMany(EvenimentORM, {foreignKey: 'idGrup'})
 //EvenimentORM.belongsTo(GrupEvenimenteORM)
 
-EvenimentORM.belongsToMany(ParticipantORM, {through: 'InscriereEveniment'})
-ParticipantORM.belongsToMany(EvenimentORM, {through: 'InscriereEveniment'})
+EvenimentORM.belongsToMany(ParticipantORM, {through: InscriereEvenimentORM})
+ParticipantORM.belongsToMany(EvenimentORM, {through: InscriereEvenimentORM})
 
 app.use(cors())
 app.use(express.json());

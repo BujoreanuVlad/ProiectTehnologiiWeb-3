@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "../login/Login.jsx";
 import Events from "../events/app.jsx";
 import EventDetails from "../events/EventDetails.jsx";
+import App from "../userPage/app.jsx"
 const AppRoutes = () => {
   return (
     <BrowserRouter>

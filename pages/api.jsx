@@ -61,6 +61,41 @@ export async function addEveniment(eventData) {
     }
 }
 
+export async function getDistinctDates() {
+    try {
+        const response = await axios.get('/eveniment/getDates', {
+            headers: { "Content-Type": "application/json" }
+        });
+        return response.data; 
+    } catch (error) {
+        console.error("Eroare la obținerea datelor distincte:", error);
+        throw error;
+    }
+}
+
+export async function getEvenimenteByDate(date) {
+    try {
+        const response = await axios.get(`/eveniment/getByDate/${date}`, {
+            headers: { "Content-Type": "application/json" }
+        });
+        return response.data; 
+    } catch (error) {
+        console.error("Eroare la obținerea evenimentelor pentru dată:", error);
+        throw error;
+    }
+}
+
+export async function getEvenimenteAll() {
+    try {
+        const response = await axios.get('/eveniment/getAll', {
+            headers: { "Content-Type": "application/json" }
+        });
+        return response.data;
+    } catch (error) {
+        console.error("Eroare la obținerea tuturor evenimentelor:", error);
+        throw error;
+    }
+}
 export async function loginUser(username, password) {
     try {
         const response = await axios.post('auth/login', {

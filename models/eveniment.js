@@ -1,9 +1,5 @@
 const sequelize = require('../sequelize.js')
-// const { sequelize } = await import('../sequelize.js')
-
-// const {DataTypes, UUIDV4} = await import('sequelize')
-const {DataTypes, UUIDV4, INTEGER} = require('sequelize')
-// const { genCodAcces } = await import("../utils.js")
+const {DataTypes, UUIDV4} = require('sequelize')
 const {genCodAcces }= require("../utils.js")
 
 const Eveniment = sequelize.define('event', {

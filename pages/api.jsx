@@ -184,3 +184,18 @@ export async function registerUser(userData) {
         throw error;
     }
 }
+
+export async function deleteUser(username, token) {
+    try {
+		return await axios.delete(
+			"participant/deleteByUsername/" + username, 
+			{headers:{
+				"Content-Type": "application/json",
+				"Authorization": token
+			}}
+		);
+    } catch (error) {
+        console.error("Eroare la stergere:", error);
+        throw error;
+    }
+}

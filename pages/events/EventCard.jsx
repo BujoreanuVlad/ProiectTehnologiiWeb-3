@@ -1,7 +1,9 @@
 import React from "react";
 import "./eventCard.css";
+import {deleteEvenimentById} from "../api.jsx"
+import Cookies from "universal-cookie";
 
-const EventCard = ({ event }) => {
+const EventCard = ({ event, refreshEvents }) => {
   const formatData = (dataString) => {
     const data = new Date(dataString);
     const datePart = data.toLocaleDateString("ro-RO", {
@@ -15,6 +17,15 @@ const EventCard = ({ event }) => {
     });
     return `${datePart} ${timePart}`;
   };
+
+  const cookies = new Cookies()
+  const token = cookies.get("authToken")
+
+  const handleDeleteEvent = () => {
+
+	deleteEvenimentById(event.id, token)
+	refreshEvents()
+  }
 
   return (
     <div className="event-card">

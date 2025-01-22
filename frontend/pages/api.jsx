@@ -1,5 +1,5 @@
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3000/';
+axios.defaults.baseURL = 'https://adventurous-adaptation-production.up.railway.app'
 
 export async function getGrupEvenimenteAll(token) {
     return await axios.get(
@@ -203,7 +203,7 @@ export async function loginUser(username, password) {
 
 export async function registerUser(userData) {
     try {
-        const response = await axios.post('/auth/register', userData, {
+        const response = await axios.post('auth/register', userData, {
             headers: {
                 'Content-Type': 'application/json',
             },

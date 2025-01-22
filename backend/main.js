@@ -35,7 +35,7 @@ app.use(express.json());
 app.use(express.static("dist"));
 
 
-const connection = mysql.createConnection({host: "localhost", user: "root", password: ""});
+const connection = mysql.createConnection({host: process.env.DB_HOST, user: process.env.DB_USERNAME, password: process.env.DB_PASSWORD});
 connection.connect((err) => {
 
 	if (err) throw err;

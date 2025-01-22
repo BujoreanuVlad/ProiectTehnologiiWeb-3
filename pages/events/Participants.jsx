@@ -9,7 +9,7 @@ const Participants = () => {
   const { eventId } = useParams(); 
 
   const cookies = new Cookies()
-  const token = cookies.get("token")
+  const token = cookies.get("authToken")
 
   const getParticipants = () => {
     getParticipantsByEvenimentId(eventId, token)
@@ -38,9 +38,7 @@ const Participants = () => {
   };
 
   const downloadCSV = () => {
-    // CSV header
     const headers = ["Nume", "Prenume", "Telefon", "Email", "Data nașterii"];
-    // Convert participants data to CSV rows
     const rows = participants.map((participant) => [
       participant.nume,
       participant.prenume,
@@ -49,7 +47,6 @@ const Participants = () => {
       formatDate(participant.dataNastere),
     ]);
 
-    // Combine header and rows into CSV format
     const csvContent =
         [headers.join(","), ...rows.map((row) => row.join(","))].join("\n");
 
@@ -60,7 +57,7 @@ const Participants = () => {
     link.setAttribute("href", url);
     link.setAttribute(
         "download",
-        `participants_event_${eventId}.csv` // Filename for the downloaded file
+        `participants_event_${eventId}.csv`
     );
     document.body.appendChild(link);
     link.click();

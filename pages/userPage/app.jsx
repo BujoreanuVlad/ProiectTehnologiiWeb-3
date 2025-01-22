@@ -32,7 +32,7 @@ const App = () => {
    <>
       <Navbar username={username} evenimente={evenimenteInregistrare} setEvenimente={setEvenimenteInregistrate}/>
       <header className="app-header">
-        <h1>Bun venit, Utilizator!</h1>
+        <h1>{"Bun venit, " + username + "!"}</h1>
       </header>
       <Timeline username={username} setEvenimenteInregistrate={setEvenimenteInregistrate}/>
       </>

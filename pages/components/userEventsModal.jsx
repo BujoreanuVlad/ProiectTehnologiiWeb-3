@@ -32,10 +32,7 @@ const UserEventsModal = ({ show, onClose, evenimente, setEvenimente, username })
   return (
     <div className="modal-overlay">
       <div className="modal-content">
-        {/* Butonul "X" pentru închidere */}
-        <button className="close-btn" onClick={onClose}>
-          X
-        </button>
+        <button className="close-btn" onClick={onClose}>x</button>
 
         <h2>Evenimentele mele</h2>
         <ul>

@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import "./navbar.css";
 import UserEventsModal from "./userEventsModal.jsx"; 
+import { useNavigate } from 'react-router-dom'; 
+import Cookies from 'universal-cookie';
 
 const Navbar = ({ username, evenimente, setEvenimente }) => {
+  const cookies = new Cookies();
+  const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showEventsModal, setShowEventsModal] = useState(false); 
 //  const [evenimente, setEvenimente] = useState([]); 
@@ -30,6 +34,8 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
 
   const handleLogout = () => {
     console.log("Delogare...");
+    cookies.remove("authToken");
+    navigate('/');
   };
 
   const handleShowEvents = () => {
@@ -43,7 +49,7 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h2>My App</h2>
+        <h2>Evenimente noi</h2>
       </div>
 
       <div className="navbar-right">
@@ -56,9 +62,7 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
           {isDropdownOpen && (
             <div className="dropdown-menu">
               <ul>
-                <li>
-                  <button onClick={handleShowEvents}>Evenimentele mele</button>
-                </li>
+                <li onClick={handleShowEvents}>Evenimentele mele</li>
                 <li onClick={handleLogout}>Delogare</li>
               </ul>
             </div>
@@ -66,12 +70,11 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
         </div>
       </div>
 
-      {/* Modala pentru a afisa evenimentele */}
       <UserEventsModal
   show={showEventsModal}
   onClose={handleCloseEventsModal}
-  evenimente={evenimente} // Trimitem lista de evenimente ca prop
-  setEvenimente={setEvenimente} // Trimitem lista de evenimente ca prop
+  evenimente={evenimente} 
+  setEvenimente={setEvenimente} 
   username={username}
 />
 

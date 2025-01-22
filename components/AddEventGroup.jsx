@@ -47,8 +47,8 @@ const AddEventGroup = ({ show, onClose, onAddGroup }) => {
     if (!show) return null;
 
     return (
-        <div className="modal-overlay">
-            <div className="custom-modal">
+        <div className="modal-overlay-form">
+            <div className="custom-modal-form">
                 <button className="close-btn" onClick={onClose}>
                     &times;
                 </button>
@@ -67,7 +67,7 @@ const AddEventGroup = ({ show, onClose, onAddGroup }) => {
                         {errors.groupName && <small className="error">{errors.groupName}</small>}
                     </div>
                     <div className="modal-actions">
-                        <button type="submit" className="btn primary">
+                        <button type="submit" className="add-group">
                             Adaugă Grup
                         </button>
                     </div>

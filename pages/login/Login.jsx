@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaUser } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import './app.css';
@@ -25,10 +25,16 @@ export default function Login() {
     const [registerBirthDate, setRegisterBirthDate] = useState('');
     const [registerName, setRegisterName] = useState('');
     const [registerPrenume, setRegisterPrenume] = useState('');
-
     const [errors, setErrors] = useState({}); 
-
     const cookies = new Cookies();
+
+    useEffect(() => {
+        document.body.classList.add('login-background');
+    
+        return () => {
+          document.body.classList.remove('login-background');
+        };
+      }, []);
 
     const validateForm = () => {
         const errObj = {};

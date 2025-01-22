@@ -19,7 +19,6 @@ const Events = () => {
     getGrupEvenimenteAll(token)
       .then((response) => {
         if (response.status === 200) {
-          // Actualizează doar dacă datele sunt diferite
           setGrupuriEvenimente((prevData) =>
             JSON.stringify(prevData) !== JSON.stringify(response.data)
               ? response.data

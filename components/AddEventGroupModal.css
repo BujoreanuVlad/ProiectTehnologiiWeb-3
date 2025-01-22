@@ -1,4 +1,4 @@
-.modal-overlay {
+.modal-overlay-form {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,9 +11,9 @@
     z-index: 1000;
 }
 
-.custom-modal {
+.custom-modal-form {
     width: 420px;
-    max-height: 600px; /* Setează o înălțime maximă fixă pentru modal */
+    max-height: 600px; 
     background: #fbf8f2;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -24,10 +24,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    overflow-y: auto; /* Permite scroll în cazul în care conținutul este prea mare */
+    overflow-y: auto; 
 }
 
-.custom-modal h2 {
+.custom-modal-form h2 {
     font-size: 24px;
     font-weight: bold;
     color: #333;
@@ -40,7 +40,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px; /* Asigură un spațiu uniform între toate elementele */
+    gap: 15px; 
 }
 
 .modal-form input,
@@ -56,13 +56,13 @@
     font-size: 16px;
     padding: 10px 15px;
     color: #333;
-    margin: 10px 0; /* Adăugăm un margin între toate inputurile și textarea */
+    margin: 10px 0; 
 }
 
 .modal-form input[type="file"] {
     width: 90%;
     max-width: 350px;
-    margin: 10px 0; /* Adăugăm un margin între inputurile de fișiere și celelalte elemente */
+    margin: 10px 0; 
 }
 
 .modal-form button {
@@ -79,15 +79,15 @@
     color: #fff;
     font-weight: 700;
     transition: background-color 0.3s;
-    margin-top: 20px; /* Distanță între ultimul input și buton */
+    /* margin-top: 20px; */
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
 }
 
-.modal-form .add-event-btn {
-    margin-top: 100px; /* Prioritate mai mare */
-}
+/* .modal-form .add-event-btn {
+    margin-top: 100px; 
+} */
 
 
 
@@ -121,57 +121,56 @@
 .modal-actions {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Asigură o distanță între buton și restul formularului */
+    margin-top: 20px; 
 }
 
 .modal-form textarea {
     height: 120px;
     border-radius: 10px;
-    margin: 10px 0; /* Adăugăm distanță între textarea și alte câmpuri */
+    margin: 10px 0; 
 }
 
 .modal-form input[type="number"] {
     height: 40px;
-    margin: 10px 0; /* Adăugăm distanță între câmpurile de input */
+    margin: 10px 0; 
 }
 
 .modal-form input::placeholder,
 .modal-form textarea::placeholder {
-    color: #888888; /* Gri deschis */
-    opacity: 1; /* Asigură că este vizibil complet */
+    color: #888888; 
+    opacity: 1;
 }
 .modal-form select {
     width: 100%;
     max-width: 400px;
-    height: 60px; /* Dimensiune similară cu celelalte inputuri */
+    height: 60px;
     background: transparent;
     border: 2px solid rgba(0, 0, 0, 0.3);
     outline: none;
-    border-radius: 40px; /* Colțuri rotunjite ca celelalte inputuri */
+    border-radius: 40px; 
     font-size: 16px;
-    padding: 10px 15px; /* Padding similar cu inputurile */
+    padding: 10px 15px; 
     color: #333;
-    margin: 10px 0; /* Adăugăm un margin între toate elementele */
-    -webkit-appearance: none; /* Elimină stilurile implicite pentru select pe unele browsere */
+    margin: 10px 0; 
+    -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
 }
 
 .modal-form select:focus {
-    border-color: #5e0001; /* Culoare border la focus */
-    box-shadow: 0 0 5px rgba(94, 0, 1, 0.5); /* Umbră la focus */
+    border-color: #5e0001; 
+    box-shadow: 0 0 5px rgba(94, 0, 1, 0.5); 
 }
 
-/* Reînviem săgețile */
 .modal-form select::-ms-expand {
-    display: none; /* Ascunde săgeata pe IE */
+    display: none; 
 }
 
 .modal-form select {
-    -webkit-appearance: none; /* Elimină stilurile implicite de săgeată pe Safari */
+    -webkit-appearance: none; 
     -moz-appearance: none;
     appearance: none;
-    padding-right: 30px; /* Lasă spațiu pentru săgeată */
+    padding-right: 30px; 
 }
 
 .modal-form select option {

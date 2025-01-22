@@ -4,8 +4,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --mode production",
-    "start": "npm run build && node main.js",
-    "dev": "concurrently --kill-others-on-fail \"webpack --mode production --watch\" \"npx nodemon main.js\""
+    "start": "npm run build && node backend/main.js",
+    "dev": "concurrently --kill-others-on-fail \"webpack --mode production --watch\" \"npx nodemon backend/main.js\""
   },
   "author": "",
   "license": "ISC",

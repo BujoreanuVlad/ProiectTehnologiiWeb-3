@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: "./pages/main.jsx", // Entry point of your application
+    entry: "./frontend/pages/main.jsx", // Entry point of your application
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js', // Output bundle file name
@@ -30,7 +30,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './index.html', // Use this HTML file as a template
+            template: './frontend/index.html', // Use this HTML file as a template
         }),
     ],
 };

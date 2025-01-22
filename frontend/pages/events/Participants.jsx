@@ -15,8 +15,7 @@ const Participants = () => {
     getParticipantsByEvenimentId(eventId, token)
       .then((response) => {
         if (response.status === 200) {
-          console.log("Aici sunt participanții : ", response.data);
-          setParticipants(response.data);
+		  setParticipants(response.data.filter((part) => part.inscriere_eveniment.dataPrezenta))
         }
       })
       .catch((error) => {
@@ -37,14 +36,29 @@ const Participants = () => {
     });
   };
 
+  const formatDateTime = (dateString) => {
+    const date = new Date(dateString);
+    const datePart = date.toLocaleDateString("ro-RO", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+    });
+	const timePart = date.toLocaleTimeString("ro-RO", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+    return `${datePart} ${timePart}`;
+  };
+
   const downloadCSV = () => {
-    const headers = ["Nume", "Prenume", "Telefon", "Email", "Data nașterii"];
+    const headers = ["Nume", "Prenume", "Telefon", "Email", "Data nașterii", "Data prezenta"];
     const rows = participants.map((participant) => [
       participant.nume,
       participant.prenume,
       participant.nrTelefon,
       participant.email,
       formatDate(participant.dataNastere),
+      formatDateTime(participant.inscriere_eveniment.dataPrezenta),
     ]);
 
     const csvContent =
@@ -77,6 +91,7 @@ const Participants = () => {
               <th>Telefon</th>
               <th>Email</th>
               <th>Data nașterii</th>
+              <th>Data confirmare prezenta</th>
             </tr>
           </thead>
           <tbody>
@@ -87,6 +102,7 @@ const Participants = () => {
                 <td>{participant.nrTelefon}</td>
                 <td>{participant.email}</td>
                 <td>{formatDate(participant.dataNastere)}</td>
+                <td>{formatDateTime(participant.inscriere_eveniment.dataPrezenta)}</td>
               </tr>
             ))}
           </tbody>

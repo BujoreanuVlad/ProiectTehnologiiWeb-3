@@ -35,7 +35,7 @@ const NavbarAdmin = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <h2><Evenimente></Evenimente></h2>
+        <h2>Evenimente</h2>
       </div>
 
       <div className="navbar-right">

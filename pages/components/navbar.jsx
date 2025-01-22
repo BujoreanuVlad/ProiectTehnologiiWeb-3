@@ -4,9 +4,11 @@ import "./navbar.css";
 import UserEventsModal from "./userEventsModal.jsx"; 
 import { useNavigate } from 'react-router-dom'; 
 import Cookies from 'universal-cookie';
+import { deleteUser } from "../api.jsx";
 
 const Navbar = ({ username, evenimente, setEvenimente }) => {
   const cookies = new Cookies();
+  const token = cookies.get("authToken")
   const navigate = useNavigate();
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showEventsModal, setShowEventsModal] = useState(false); 
@@ -38,6 +40,20 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
     navigate('/');
   };
 
+  const handleDelete = () => {
+	deleteUser(username, token)
+	.then((response) => {
+
+		if (response.status === 200) {
+			cookies.remove("authToken");
+			navigate('/');
+		}
+	})
+	.catch((error) => {
+		console.error("Eroare la stergerea contului", error)
+	})
+  }
+
   const handleShowEvents = () => {
     setShowEventsModal(true);
   };
@@ -64,6 +80,7 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
               <ul>
                 <li onClick={handleShowEvents}>Evenimentele mele</li>
                 <li onClick={handleLogout}>Delogare</li>
+				<li onClick={handleDelete}>Stergere cont</li>
               </ul>
             </div>
           )}

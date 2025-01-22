@@ -41,7 +41,7 @@ const UserEventsModal = ({ show, onClose, evenimente, setEvenimente, username })
 				if (eveniment.inscriere_eveniment.dataPrezenta) {
 					return (
 						  <li key={eveniment.id}>
-							<strong>{eveniment.nume}</strong> - {eveniment.dataDeschidere} {eveniment.stare}
+							<strong>{eveniment.nume}</strong> - {eveniment.dataDeschidere} {eveniment.stare}; PREZENTA: CONFIRMATA
 						  </li>
 						  )
 			  }
@@ -49,7 +49,7 @@ const UserEventsModal = ({ show, onClose, evenimente, setEvenimente, username })
 					return (
 					<form onSubmit={(ev) => {ev.preventDefault(); submitCode(eveniment, ev.target["0"].value)}}>
 						<li key={eveniment.id}>
-							<strong>{eveniment.nume}</strong> - {eveniment.dataDeschidere} {eveniment.stare} <input type="text" placeholder="cod acces"/> <input type="submit" value="submit code"/>
+							<strong>{eveniment.nume}</strong> - {eveniment.dataDeschidere} {eveniment.stare}; PREZENTA: NECONFIRMATA <input type="text" placeholder="cod acces"/> <input type="submit" value="submit code"/>
 						</li>
 					</form>
 						  )

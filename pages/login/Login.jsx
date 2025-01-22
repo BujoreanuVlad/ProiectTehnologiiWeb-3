@@ -113,7 +113,6 @@ export default function Login() {
                 } else {
                     console.log("Log in successful");
                     let user = token.substring(0, token.length - ";SECURITY_T0KEN".length);
-                    console.log(user);
                     if (user === "admin") {
                         console.log("Rutare admin");
                         toast.success("Autentificare reușită! Bun venit, Admin."); 
@@ -121,7 +120,7 @@ export default function Login() {
                     } else {
                         console.log("Rutare user");
                         toast.success("Autentificare reușită! Bun venit!"); 
-                        navigate("/user");
+                        navigate("/user", {state: {"username": user}});
                     }
                 }
             } else {

@@ -159,7 +159,33 @@ inscriereEvenimentDao = {
 			let participant = await ParticipantORM.findByPk(req.params.username)
 			let evenimente = await participant.getEvents()
 
-			res.status(200).json(evenimente)
+			console.log(evenimente)
+
+			if (evenimente) {
+
+				let currentTime = new Date()
+
+				for (let i = 0; i < evenimente; i++) {
+
+
+					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval)) {
+						evenimente[i].stare = "OPEN"
+					}
+					else {
+						evenimente[i].stare = "CLOSED"
+					}
+
+					console.log(evenimente[i])
+
+					await evenimente[i].save()
+				}
+
+				res.status(200).json(evenimente)
+			}
+			else {
+				res.status(404).send()
+			}
+
 		}
 		catch(error) {
 			res.status(423).send(error.message)

@@ -4,14 +4,16 @@ import "./app.css";
 import Timeline from "./timeline.jsx";
 import { getEventsByParticipantId } from "../api.jsx"
 import Cookies from 'universal-cookie';
+import { useLocation } from "react-router-dom";
 
 const App = () => {
 
 	const [evenimenteInregistrare, setEvenimenteInregistrate] = useState([])
   const cookies = new Cookies()
   const token = cookies.get("authToken")
-  const username = "mnastase"
-
+  const state = useLocation()
+  console.log(state)
+  const {username} = state.state
 
   useEffect(() => {
 
@@ -28,11 +30,11 @@ const App = () => {
 
   return (
    <>
-      <Navbar username={username} evenimente={evenimenteInregistrare}/>
+      <Navbar username={username} evenimente={evenimenteInregistrare} setEvenimente={setEvenimenteInregistrate}/>
       <header className="app-header">
         <h1>Bun venit, Utilizator!</h1>
       </header>
-      <Timeline username={username}/>
+      <Timeline username={username} setEvenimenteInregistrate={setEvenimenteInregistrate}/>
       </>
   );
 };

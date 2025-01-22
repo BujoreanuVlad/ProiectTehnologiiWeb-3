@@ -1,8 +1,12 @@
 const { Sequelize } = require('sequelize');
 // const { Sequelize } = await import('sequelize')
 
-const sequelize = new Sequelize("event_app", "root", "", {
-    host: 'localhost',
+const sequelize = new Sequelize({
+	username: process.env.DB_USERNAME,
+	password: process.env.DB_PASSWORD,
+	database: process.env.DATABASE,
+	port: process.env.DB_PORT,
+	host: process.env.DB_HOST,
     dialect: 'mysql',
     define: {
         charset: 'utf8',

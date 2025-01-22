@@ -79,8 +79,8 @@ const Navbar = ({ username, evenimente, setEvenimente }) => {
             <div className="dropdown-menu">
               <ul>
                 <li onClick={handleShowEvents}>Evenimentele mele</li>
+                <li className="delete-account" onClick={handleDelete}>Ștergere cont</li>
                 <li onClick={handleLogout}>Delogare</li>
-				<li onClick={handleDelete}>Stergere cont</li>
               </ul>
             </div>
           )}

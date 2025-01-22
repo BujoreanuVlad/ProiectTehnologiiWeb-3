@@ -62,10 +62,10 @@
   line-height: 1.6;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   margin-top: 20px;
-  overflow: auto; /* Permite scroll dacă textul depășește înălțimea */
-  max-height: 300px; /* Limitează înălțimea maximă */
-  word-wrap: break-word; /* Rupe liniile lungi care ar putea depăși containerul */
-  box-sizing: border-box; /* Include padding și border în dimensiuni */
+  overflow: auto; 
+  max-height: 300px; 
+  word-wrap: break-word; 
+  box-sizing: border-box;
 }
 
 .invite-button {
@@ -150,7 +150,7 @@ h2 {
 .event-title {
   display: flex;
   align-items: center;
-  gap: 20px; /* Spațiu între imagine și text */
+  gap: 20px; 
   flex: 2;
 }
 
@@ -158,7 +158,7 @@ h2 {
   width: 120px;
   height: 120px;
   border-radius: 10px;
-  object-fit: cover; /* Ajustează imaginea pentru a se potrivi în container */
+  object-fit: cover; 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 

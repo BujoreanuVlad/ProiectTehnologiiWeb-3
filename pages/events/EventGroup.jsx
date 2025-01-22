@@ -58,14 +58,15 @@ const EventGroup = ({ eventGroup, setEventGroups }) => {
 
   return (
     <div className="event-group">
-      <h2>{eventGroup.nume}</h2><button onClick={handleDeleteGrup}>Delete</button>
+      <h2>{eventGroup.nume}</h2>
+      <button onClick={handleDeleteGrup} className="delete-group-btn">Delete</button>
       {
         events.map((event, index) => (
 		<>
           <Link key={index} to={`/events/${event.id}`}>
             <EventCard event={event} refreshEvents={getEvenimente}/>
           </Link>
-		  <button onClick={() => {handleDeleteEvent(event.id)}}>Delete</button>
+		  <button onClick={() => {handleDeleteEvent(event.id)}} className="delete-event-btn">Delete</button>
 		</>
         ))}
     </div>

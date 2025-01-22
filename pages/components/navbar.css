@@ -69,4 +69,8 @@
   .dropdown-menu li:hover {
     background-color: #7a0002;
   }
-  
+
+  .dropdown-menu li.delete-account:hover {
+    background-color: rgb(40, 119, 8); 
+    color: white; 
+  }

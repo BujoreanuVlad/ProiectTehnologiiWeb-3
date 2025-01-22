@@ -123,8 +123,8 @@ const AddEvent = ({ show, onClose }) => {
     if (!show) return null;
 
     return (
-        <div className="modal-overlay">
-            <div className="custom-modal">
+        <div className="modal-overlay-form">
+            <div className="custom-modal-form">
                 <button className="close-btn" onClick={onClose}>
                     &times;
                 </button>

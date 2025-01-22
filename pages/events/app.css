@@ -1,5 +1,5 @@
-body {
-  background-color: #faecd8 !important;
+/* body {
+  background-color: #faecd8;
   margin: 0;
   padding: 0;
   height: 100%;
@@ -7,7 +7,7 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-}
+} */
 
 .container {
   width: 90%;

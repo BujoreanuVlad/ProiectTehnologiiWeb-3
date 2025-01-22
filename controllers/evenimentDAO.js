@@ -32,7 +32,7 @@ evenimentDao = {
 
 			let currentTime = new Date()
 
-			if (currentTime >= eveniment.dataDeschidere && currentTime <= new Date(eveniment.dataDeschidere.getTime() + eveniment.interval)) {
+			if (currentTime >= eveniment.dataDeschidere && currentTime <= new Date(eveniment.dataDeschidere.getTime() + eveniment.interval * 60000)) {
 				eveniment.stare = "OPEN"
 			}
 			else {
@@ -62,10 +62,10 @@ evenimentDao = {
 
 				let currentTime = new Date()
 
-				for (let i = 0; i < evenimente; i++) {
+				for (let i = 0; i < evenimente.length; i++) {
 
 
-					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval)) {
+					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval * 60000)) {
 						evenimente[i].stare = "OPEN"
 					}
 					else {
@@ -111,10 +111,10 @@ evenimentDao = {
 
 				let currentTime = new Date()
 
-				for (let i = 0; i < evenimente; i++) {
+				for (let i = 0; i < evenimente.length; i++) {
 
 
-					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval)) {
+					if (currentTime >= evenimente[i].dataDeschidere && currentTime <= new Date(evenimente[i].dataDeschidere.getTime() + evenimente[i].interval * 60000)) {
 						evenimente[i].stare = "OPEN"
 					}
 					else {

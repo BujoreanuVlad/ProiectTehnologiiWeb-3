@@ -58,6 +58,14 @@ router.get("/", (req, res) => {
 	res.sendFile(path.join(__dirname, "dist/index.html"));
 })
 
+router.get("/user", (req, res) => {
+	res.sendFile(path.join(__dirname, "dist/index.html"));
+})
+
+router.get("/admin", (req, res) => {
+	res.sendFile(path.join(__dirname, "dist/index.html"));
+})
+
 app.get("/resetDB", async (req, res) => {
     try {
         await sequelize.sync({ force: true });

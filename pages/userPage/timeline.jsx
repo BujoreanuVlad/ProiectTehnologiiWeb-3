@@ -5,7 +5,7 @@ import "./ModalEveniment.css";
 import { getEvenimenteAll, getEvenimentId } from '../api.jsx';
 import Cookies from 'universal-cookie';
 
-const Timeline = ({ username }) => {
+const Timeline = ({ username, setEvenimenteInregistrate }) => {
   const [eventsData, setEventsData] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState(null); 
   const [showModal, setShowModal] = useState(false); 
@@ -95,6 +95,7 @@ const Timeline = ({ username }) => {
           onClose={handleCloseModal} 
           eveniment={selectedEvent} 
 		  username={username}
+		  setEvenimenteInregistrate={setEvenimenteInregistrate}
         />
       )}
     </div>

@@ -3,7 +3,7 @@ import { FaUserCircle } from "react-icons/fa";
 import "./navbar.css";
 import UserEventsModal from "./userEventsModal.jsx"; 
 
-const Navbar = ({ username, evenimente }) => {
+const Navbar = ({ username, evenimente, setEvenimente }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [showEventsModal, setShowEventsModal] = useState(false); 
 //  const [evenimente, setEvenimente] = useState([]); 
@@ -71,6 +71,8 @@ const Navbar = ({ username, evenimente }) => {
   show={showEventsModal}
   onClose={handleCloseEventsModal}
   evenimente={evenimente} // Trimitem lista de evenimente ca prop
+  setEvenimente={setEvenimente} // Trimitem lista de evenimente ca prop
+  username={username}
 />
 
     </nav>

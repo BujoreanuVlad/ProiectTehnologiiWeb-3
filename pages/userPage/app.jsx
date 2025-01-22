@@ -5,6 +5,8 @@ import Timeline from "./timeline.jsx";
 import { getEventsByParticipantId } from "../api.jsx"
 import Cookies from 'universal-cookie';
 import { useLocation } from "react-router-dom";
+import { ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
 
@@ -29,7 +31,8 @@ const App = () => {
   }, [])
 
   return (
-   <>
+   <> 
+      <ToastContainer />
       <Navbar username={username} evenimente={evenimenteInregistrare} setEvenimente={setEvenimenteInregistrate}/>
       <header className="app-header">
         <h1>{"Bun venit, " + username + "!"}</h1>

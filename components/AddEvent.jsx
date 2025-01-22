@@ -103,7 +103,7 @@ const AddEvent = ({ show, onClose }) => {
 
         try {
             await addEveniment(eventData, token);
-            toast.success('Evenimentul a fost adăugat cu succes!');
+            // toast.success('Evenimentul a fost adăugat cu succes!');
 
             setEventName('');
             setEventDate('');

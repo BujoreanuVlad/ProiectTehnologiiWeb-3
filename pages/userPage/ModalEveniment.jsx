@@ -32,7 +32,7 @@ const ModalEveniment = ({ show, onClose, eveniment, username, setEvenimenteInreg
   const fetchEventDetails = async (id) => {
     try {
       const details = await getEvenimentId(id, token);
-      setEventDetails(details.data); // Setează detaliile evenimentului
+      setEventDetails(details.data); 
     } catch (error) {
       console.error("Eroare la obținerea detaliilor evenimentului:", error);
     }

@@ -131,11 +131,11 @@ export default function Login() {
                 }
             } else {
                 setErrorMessage("Autentificare eșuată. Verifică username-ul și parola.");
-                toast.error("Autentificare eșuată. Verifică username-ul și parola."); // Notificare eroare
+                toast.error("Autentificare eșuată. Verifică username-ul și parola."); 
             }
         } catch (error) {
             setErrorMessage("Eroare la autentificare. Te rugăm să încerci din nou.");
-            toast.error("Eroare la autentificare. Te rugăm să încerci din nou."); // Notificare eroare
+            toast.error("Eroare la autentificare. Te rugăm să încerci din nou."); 
             console.error("Eroare:", error);
         }
     };

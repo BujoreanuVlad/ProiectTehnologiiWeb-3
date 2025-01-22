@@ -11,6 +11,21 @@ export async function getGrupEvenimenteAll(token) {
     );
 }
 
+export async function deleteGrupEvenimenteById(id, token) {
+    try {
+		return await axios.delete(
+			"grupEvenimente/delete/" + id, 
+			{headers:{
+				"Content-Type": "application/json",
+				"Authorization": token
+			}}
+		);
+    } catch (error) {
+        console.error("Eroare la stergere:", error);
+        throw error;
+    }
+}
+
 export async function getEvenimenteByGrupId(id, token) {
     return await axios.get(
         "grupEvenimente/getEvents/" + id,
@@ -29,6 +44,21 @@ export async function getEvenimentId(id, token) {
 			"Authorization": token
 		}}
     );
+}
+
+export async function deleteEvenimentById(id, token) {
+    try {
+		return await axios.delete(
+			"eveniment/deleteById/" + id, 
+			{headers:{
+				"Content-Type": "application/json",
+				"Authorization": token
+			}}
+		);
+    } catch (error) {
+        console.error("Eroare la stergere:", error);
+        throw error;
+    }
 }
 
 

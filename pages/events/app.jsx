@@ -45,10 +45,10 @@ const Events = () => {
       <NavbarAdmin />
       <div className="grupEvenimente">
         {grupuriEvenimente.length === 0 ? (
-          <p>Se încarcă grupurile de evenimente...</p>
+          <p></p>
         ) : (
           grupuriEvenimente.map((group, index) => (
-            <EventGroup key={index} eventGroup={group} />
+            <EventGroup key={index} eventGroup={group} setEventGroups={setGrupuriEvenimente}/>
           ))
         )}
       </div>

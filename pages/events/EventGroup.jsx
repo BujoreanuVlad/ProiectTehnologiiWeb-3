@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import EventCard from "./EventCard.jsx";
 import { Link } from "react-router-dom";
-import { getEvenimenteByGrupId } from "../api.jsx";
+import { getGrupEvenimenteAll, getEvenimenteByGrupId, deleteGrupEvenimenteById, deleteEvenimentById } from "../api.jsx";
 import "./eventGroup.css";
 import Cookies from "universal-cookie";
 
-const EventGroup = ({ eventGroup }) => {
+const EventGroup = ({ eventGroup, setEventGroups }) => {
   const [events, setEvents] = useState([]);
   const cookies = new Cookies();
   const token = cookies.get("authToken");
@@ -29,14 +29,44 @@ const EventGroup = ({ eventGroup }) => {
     return () => clearInterval(intervalId); 
   }, [getEvenimente]);
 
+  const handleDeleteGrup = (event) => {
+
+	deleteGrupEvenimenteById(eventGroup.id, token)
+
+	getGrupEvenimenteAll(token)
+      .then((response) => {
+        if (response.status === 200) {
+          setEventGroups((prevData) =>
+            JSON.stringify(prevData) !== JSON.stringify(response.data)
+              ? response.data
+              : prevData
+          );
+        } else {
+          console.error("Eroare la încărcarea grupurilor de evenimente:", response);
+        }
+      })
+      .catch((error) => {
+        console.error("Eroare API:", error);
+      })
+  }
+
+  const handleDeleteEvent = (id) => {
+
+    deleteEvenimentById(id, token)
+    getEvenimente()
+  }
+
   return (
     <div className="event-group">
-      <h2>{eventGroup.nume}</h2>
+      <h2>{eventGroup.nume}</h2><button onClick={handleDeleteGrup}>Delete</button>
       {
         events.map((event, index) => (
+		<>
           <Link key={index} to={`/events/${event.id}`}>
-            <EventCard event={event} />
+            <EventCard event={event} refreshEvents={getEvenimente}/>
           </Link>
+		  <button onClick={() => {handleDeleteEvent(event.id)}}>Delete</button>
+		</>
         ))}
     </div>
   );
